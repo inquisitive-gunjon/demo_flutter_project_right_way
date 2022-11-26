@@ -18,6 +18,8 @@ import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_text_button.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_title_row.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/title_row.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/brand/all_brand_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
@@ -34,6 +36,7 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/footer_banne
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/home_category_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/latest_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/main_section_banner.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/mens_fashion_product_view.dart.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/flashdeal/flash_deal_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/recommended_product_view.dart';
@@ -169,17 +172,24 @@ class _HomePageState extends State<HomePage> {
                                   boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
                                   900 : 200], spreadRadius: 1, blurRadius: 1)],
                                   borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
-                                child: Row(mainAxisAlignment : MainAxisAlignment.spaceBetween, children: [
+                                child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
 
+                                  // Container(
+                                  //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+                                  //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+                                  // ),
+                                  //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+                                  // ),
+                                  Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
                                   Text(getTranslated('SEARCH_HINT', context),
                                       style: robotoRegular.copyWith(color: Theme.of(context).hintColor)),
 
-                                  Container(
-                                    width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
-                                      borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
-                                  ),
-                                    child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
-                                  ),
+                                  // Container(
+                                  //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+                                  //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+                                  // ),
+                                  //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+                                  // ),
                             ]),
                           ),
                         ),
@@ -192,93 +202,97 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           BannersView(),
-                          SizedBox(height: Dimensions.HOME_PAGE_PADDING),
-
-
-
-                          // Category
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            child: TitleRow(title: getTranslated('CATEGORY', context),
-                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()))),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                              child: Text(getTranslated('CATEGORY', context), style: titleHeader),
+                              // TitleRow(title: getTranslated('CATEGORY', context),
+                              //     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()))),
+                            ),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
                             child: CategoryView(isHomePage: true),
                           ),
-
-
-
-
-
-                          // Mega Deal
-                          Consumer<FlashDealProvider>(
-                            builder: (context, flashDeal, child) {
-                              return  (flashDeal.flashDeal != null && flashDeal.flashDealList != null
-                                  && flashDeal.flashDealList.length > 0)
-                                  ? TitleRow(title: getTranslated('flash_deal', context),
-                                      eventDuration: flashDeal.flashDeal != null ? flashDeal.duration : null,
-                                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FlashDealScreen()));
-                                      },isFlash: true,
-                                      )
-                                  : SizedBox.shrink();
-                            },
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTextButton(title: getTranslated('CATEGORY', context,),
+                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()))),
                           ),
+
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                          Consumer<FlashDealProvider>(
-                            builder: (context, megaDeal, child) {
-                              return  (megaDeal.flashDeal != null && megaDeal.flashDealList != null && megaDeal.flashDealList.length > 0)
-                                  ? Container(height: MediaQuery.of(context).size.width*.77,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                                    child: FlashDealsView(),
-                                  )) : SizedBox.shrink();},),
 
-
-
-
-
-                          // Brand
-                          Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?
-                          Padding(
-                            padding: const EdgeInsets.only(left: Dimensions.PADDING_SIZE_EXTRA_SMALL, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                            bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            child: TitleRow(title: getTranslated('brand', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllBrandScreen()));}),
-                          ):SizedBox(),
-                          SizedBox(height: Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?Dimensions.PADDING_SIZE_SMALL: 0),
-                          Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?
-                          BrandView(isHomePage: true) : SizedBox(),
-
-
-
-                          //top seller
-                          singleVendor?SizedBox():
-                          TitleRow(title: getTranslated('top_seller', context),
-                            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllTopSellerScreen(topSeller: null,)));},),
-                          singleVendor?SizedBox(height: 0):SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                          singleVendor?SizedBox():
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: TopSellerView(isHomePage: true),
-                          ),
-
-
-
-
-
-                          //footer banner
-                          Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
-                            return footerBannerProvider.footerBannerList != null && footerBannerProvider.footerBannerList.length > 0?
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                              child: FooterBannersView(index: 0,),
-                            ):SizedBox();
-                          }),
-
-
-
+                          //
+                          //
+                          // // Mega Deal
+                          // Consumer<FlashDealProvider>(
+                          //   builder: (context, flashDeal, child) {
+                          //     return  (flashDeal.flashDeal != null && flashDeal.flashDealList != null
+                          //         && flashDeal.flashDealList.length > 0)
+                          //         ? TitleRow(title: getTranslated('flash_deal', context),
+                          //             eventDuration: flashDeal.flashDeal != null ? flashDeal.duration : null,
+                          //             onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FlashDealScreen()));
+                          //             },isFlash: true,
+                          //             )
+                          //         : SizedBox.shrink();
+                          //   },
+                          // ),
+                          // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          // Consumer<FlashDealProvider>(
+                          //   builder: (context, megaDeal, child) {
+                          //     return  (megaDeal.flashDeal != null && megaDeal.flashDealList != null && megaDeal.flashDealList.length > 0)
+                          //         ? Container(height: MediaQuery.of(context).size.width*.77,
+                          //         child: Padding(
+                          //           padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //           child: FlashDealsView(),
+                          //         )) : SizedBox.shrink();},),
+                          //
+                          //
+                          //
+                          //
+                          //
+                          // // Brand
+                          // Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: Dimensions.PADDING_SIZE_EXTRA_SMALL, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+                          //   bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          //   child: TitleRow(title: getTranslated('brand', context),
+                          //       onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllBrandScreen()));}),
+                          // ):SizedBox(),
+                          // SizedBox(height: Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?Dimensions.PADDING_SIZE_SMALL: 0),
+                          // Provider.of<SplashProvider>(context, listen: false).configModel.brandSetting == "1"?
+                          // BrandView(isHomePage: true) : SizedBox(),
+                          //
+                          //
+                          //
+                          // //top seller
+                          // singleVendor?SizedBox():
+                          // TitleRow(title: getTranslated('top_seller', context),
+                          //   onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllTopSellerScreen(topSeller: null,)));},),
+                          // singleVendor?SizedBox(height: 0):SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          // singleVendor?SizedBox():
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //   child: TopSellerView(isHomePage: true),
+                          // ),
+                          //
+                          //
+                          //
+                          //
+                          //
+                          // //footer banner
+                          // Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
+                          //   return footerBannerProvider.footerBannerList != null && footerBannerProvider.footerBannerList.length > 0?
+                          //   Padding(
+                          //     padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //     child: FooterBannersView(index: 0,),
+                          //   ):SizedBox();
+                          // }),
+                          //
+                          //
+                          //
 
 
                           // Featured Products
@@ -289,16 +303,21 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: Padding(
                                   padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
-                                  child: TitleRow(title: getTranslated('featured_products', context),
-                                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(productType: ProductType.FEATURED_PRODUCT)));}),
+                                  child: CustomTitleRow(title: getTranslated("mens_fashion", context),
+                                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(productType: ProductType.MENS_FASHION_PRODUCT)));}),
                                 ),
                               ):SizedBox();
                             }
                           ),
 
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //   child: FeaturedProductView(scrollController: _scrollController, isHome: true,),
+                          // ),
+
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: FeaturedProductView(scrollController: _scrollController, isHome: true,),
+                            child: MensFashionProductView(scrollController: _scrollController, isHome: true,),
                           ),
 
 
@@ -307,59 +326,87 @@ class _HomePageState extends State<HomePage> {
 
 
                           // Featured Deal
-                          Consumer<FeaturedDealProvider>(
-                            builder: (context, featuredDealProvider, child) {
-                              return featuredDealProvider.featuredDealProductList != null && featuredDealProvider.featuredDealProductList.length >0 ?
-                              Padding(padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
-                                child: TitleRow(title: getTranslated('featured_deals', context),
-                                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FeaturedDealScreen()));}),
-                              ) : SizedBox.shrink();},),
-
-                          Consumer<FeaturedDealProvider>(
-                            builder: (context, featuredDealProvider, child) {
-                              return featuredDealProvider.featuredDealProductList != null && featuredDealProvider.featuredDealProductList.length >0 ?
-                             Container(height: featuredDealProvider.featuredDealProductList.length> 4 ? 120 * 4.0 : 120 * (double.parse(featuredDealProvider.featuredDealProductList.length.toString())),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                                    child: FeaturedDealsView(),
-                                  )) : SizedBox.shrink();},),
-
-
+                          // Consumer<FeaturedDealProvider>(
+                          //   builder: (context, featuredDealProvider, child) {
+                          //     return featuredDealProvider.featuredDealProductList != null && featuredDealProvider.featuredDealProductList.length >0 ?
+                          //     Padding(padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
+                          //       child: TitleRow(title: getTranslated('featured_deals', context),
+                          //           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => FeaturedDealScreen()));}),
+                          //     ) : SizedBox.shrink();},),
+                          //
+                          // Consumer<FeaturedDealProvider>(
+                          //   builder: (context, featuredDealProvider, child) {
+                          //     return featuredDealProvider.featuredDealProductList != null && featuredDealProvider.featuredDealProductList.length >0 ?
+                          //    Container(height: featuredDealProvider.featuredDealProductList.length> 4 ? 120 * 4.0 : 120 * (double.parse(featuredDealProvider.featuredDealProductList.length.toString())),
+                          //         child: Padding(
+                          //           padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //           child: FeaturedDealsView(),
+                          //         )) : SizedBox.shrink();},),
 
 
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: RecommendedProductView(),
-                          ),
+
+
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //   child: RecommendedProductView(),
+                          // ),
 
 
 
 
 
                           //footer banner
-                          Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
-                            return footerBannerProvider.mainSectionBannerList != null &&
-                                footerBannerProvider.mainSectionBannerList.length > 0?
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                              child: MainSectionBannersView(index: 0,),
-                            ):SizedBox();
-
-                          }),
+                          // Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
+                          //   return footerBannerProvider.mainSectionBannerList != null &&
+                          //       footerBannerProvider.mainSectionBannerList.length > 0?
+                          //   Padding(
+                          //     padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //     child: MainSectionBannersView(index: 0,),
+                          //   ):SizedBox();
+                          //
+                          // }),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.width/4.1,
+                                decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5))),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: Images.placeholder, fit: BoxFit.cover,
+                                    image: 'http://ukrbd.com/images/website/banner3.jpg',
+                                    imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
 
 
 
                           // Latest Products
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          //   child: TitleRow(title: getTranslated('latest_products', context),
+                          //       onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                          //           productType: ProductType.LATEST_PRODUCT)));}),
+                          // ),
+                          // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          // LatestProductView(scrollController: _scrollController),
+                          // SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            child: TitleRow(title: getTranslated('latest_products', context),
+                            child: TitleRow(title: getTranslated('mobile_products', context),
                                 onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
-                                    productType: ProductType.LATEST_PRODUCT)));}),
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                           LatestProductView(scrollController: _scrollController),
                           SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
 
 
                           //Home category
@@ -377,61 +424,64 @@ class _HomePageState extends State<HomePage> {
 
 
                           //Category filter
-                          Consumer<ProductProvider>(
-                              builder: (ctx,prodProvider,child) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                              child: Row(children: [
-                                Expanded(child: Text(prodProvider.title == 'xyz' ? getTranslated('new_arrival',context):prodProvider.title, style: titleHeader)),
-                                prodProvider.latestProductList != null ? PopupMenuButton(
-                                  itemBuilder: (context) {
-                                    return [
-                                      PopupMenuItem(value: ProductType.NEW_ARRIVAL, child: Text(getTranslated('new_arrival',context)), textStyle: robotoRegular.copyWith(
-                                        color: Theme.of(context).hintColor,
-                                         )),
-                                      PopupMenuItem(value: ProductType.TOP_PRODUCT, child: Text(getTranslated('top_product',context)), textStyle: robotoRegular.copyWith(
-                                        color: Theme.of(context).hintColor,
-                                        )),
-                                      PopupMenuItem(value: ProductType.BEST_SELLING, child: Text(getTranslated('best_selling',context)), textStyle: robotoRegular.copyWith(
-                                        color: Theme.of(context).hintColor,
-                                       )),
-                                      PopupMenuItem(value: ProductType.DISCOUNTED_PRODUCT, child: Text(getTranslated('discounted_product',context)), textStyle: robotoRegular.copyWith(
-                                        color: Theme.of(context).hintColor,
-                                      )),
-                                    ];
-                                  },
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL)),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL,vertical:Dimensions.PADDING_SIZE_SMALL ),
-                                    child: Image.asset(Images.dropdown, scale: 3,),
-                                  ),
-                                  onSelected: (value) {
-                                    if(value == ProductType.NEW_ARRIVAL){
-                                      Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[0]);
-                                    }else if(value == ProductType.TOP_PRODUCT){
-                                      Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[1]);
-                                    }else if(value == ProductType.BEST_SELLING){
-                                      Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[2]);
-                                    }else if(value == ProductType.DISCOUNTED_PRODUCT){
-                                      Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[3]);
-                                    }
-
-                                    ProductView(isHomePage: false, productType: value, scrollController: _scrollController);
-                                    Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: true);
-
-
-                                  }
-                                ) : SizedBox(),
-                              ]),
-                            );
-                          }),
-                          ProductView(isHomePage: false, productType: ProductType.NEW_ARRIVAL, scrollController: _scrollController),
+                          // Consumer<ProductProvider>(
+                          //     builder: (ctx,prodProvider,child) {
+                          //   return Padding(
+                          //     padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          //     child: Row(children: [
+                          //       Expanded(child: Text(prodProvider.title == 'xyz' ? getTranslated('new_arrival',context):prodProvider.title, style: titleHeader)),
+                          //       prodProvider.latestProductList != null ? PopupMenuButton(
+                          //         itemBuilder: (context) {
+                          //           return [
+                          //             PopupMenuItem(value: ProductType.NEW_ARRIVAL, child: Text(getTranslated('new_arrival',context)), textStyle: robotoRegular.copyWith(
+                          //               color: Theme.of(context).hintColor,
+                          //                )),
+                          //             PopupMenuItem(value: ProductType.TOP_PRODUCT, child: Text(getTranslated('top_product',context)), textStyle: robotoRegular.copyWith(
+                          //               color: Theme.of(context).hintColor,
+                          //               )),
+                          //             PopupMenuItem(value: ProductType.BEST_SELLING, child: Text(getTranslated('best_selling',context)), textStyle: robotoRegular.copyWith(
+                          //               color: Theme.of(context).hintColor,
+                          //              )),
+                          //             PopupMenuItem(value: ProductType.DISCOUNTED_PRODUCT, child: Text(getTranslated('discounted_product',context)), textStyle: robotoRegular.copyWith(
+                          //               color: Theme.of(context).hintColor,
+                          //             )),
+                          //           ];
+                          //         },
+                          //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL)),
+                          //         child: Padding(
+                          //           padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL,vertical:Dimensions.PADDING_SIZE_SMALL ),
+                          //           child: Image.asset(Images.dropdown, scale: 3,),
+                          //         ),
+                          //         onSelected: (value) {
+                          //           if(value == ProductType.NEW_ARRIVAL){
+                          //             Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[0]);
+                          //           }else if(value == ProductType.TOP_PRODUCT){
+                          //             Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[1]);
+                          //           }else if(value == ProductType.BEST_SELLING){
+                          //             Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[2]);
+                          //           }else if(value == ProductType.DISCOUNTED_PRODUCT){
+                          //             Provider.of<ProductProvider>(context, listen: false).changeTypeOfProduct(value, types[3]);
+                          //           }
+                          //
+                          //           ProductView(isHomePage: false, productType: value, scrollController: _scrollController);
+                          //           Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: true);
+                          //
+                          //
+                          //         }
+                          //       ) : SizedBox(),
+                          //     ]),
+                          //   );
+                          // }),
+                          // ProductView(isHomePage: false, productType: ProductType.NEW_ARRIVAL, scrollController: _scrollController),
                           SizedBox(height: Dimensions.HOME_PAGE_PADDING),
 
                         ],
                       ),
                     ),
                   )
+
+
+
                 ],
               ),
 

@@ -61,6 +61,10 @@ class ProductView extends StatelessWidget {
         }
         else if(productType == ProductType.FEATURED_PRODUCT) {
           productList = prodProvider.featuredProductList;
+        }else if(productType == ProductType.MENS_FASHION_PRODUCT) {
+          productList = prodProvider.featuredProductList;
+        }else if(productType == ProductType.MOBILE_PRODUCT) {
+          productList = prodProvider.featuredProductList;
         }else if(productType == ProductType.TOP_PRODUCT) {
           productList = prodProvider.latestProductList;
         }else if(productType == ProductType.BEST_SELLING) {

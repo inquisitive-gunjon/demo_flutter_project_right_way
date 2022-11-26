@@ -7,7 +7,6 @@ import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
 class BannerRepo {
   final DioClient dioClient;
   BannerRepo({@required this.dioClient});
-
   Future<ApiResponse> getBannerList() async {
     try {
       final response = await dioClient.get(AppConstants.MAIN_BANNER_URI);

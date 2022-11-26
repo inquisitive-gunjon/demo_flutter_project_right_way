@@ -99,7 +99,7 @@ class BannersView extends StatelessWidget {
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(bannerImage),
+                            child: Image.asset(bannerImage,fit: BoxFit.cover,),
                             // FadeInImage.assetNetwork(
                             //   placeholder: Images.placeholder, fit: BoxFit.cover,
                             //   image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.bannerImageUrl}'
@@ -158,7 +158,7 @@ class BannerModelClass{
     "assets/banner/3.jpg",
     "assets/banner/4.jpg",
     "assets/banner/5.jpg",
-    "assets/banner/6.jpg",
+    "assets/banner/6.png",
     "assets/banner/7.jpg",
     "assets/banner/8.jpg",
     "assets/banner/9.jpg",

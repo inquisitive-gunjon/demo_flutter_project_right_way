@@ -28,8 +28,8 @@ class AllProductScreen extends StatelessWidget {
             color: ColorResources.WHITE),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(productType == ProductType.FEATURED_PRODUCT ?
-        'Featured Product':'Latest Product',
+        title: Text(productType == ProductType.MENS_FASHION_PRODUCT ?
+        "Men's Fashion":productType == ProductType.MOBILE_PRODUCT?'Mobile':'Latest Product',
             style: titilliumRegular.copyWith(fontSize: 20, color: ColorResources.WHITE)),
       ),
 
@@ -43,7 +43,6 @@ class AllProductScreen extends StatelessWidget {
             controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
-
                 child: Padding(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                   child: ProductView(isHomePage: false , productType: productType, scrollController: _scrollController),
