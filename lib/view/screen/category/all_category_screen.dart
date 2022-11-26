@@ -31,17 +31,17 @@ class AllCategoryScreen extends StatelessWidget {
 
                 Container(
                   width: 100,
-                  margin: EdgeInsets.only(top: 3),
+                  margin: EdgeInsets.only(top: 0),
                   height: double.infinity,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).highlightColor,
-                    boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ? 700 : 200],
-                        spreadRadius: 1, blurRadius: 1)],
+                    color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,//,
+                    // boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ? 700 : 200],
+                    //     spreadRadius: 1, blurRadius: 1)],
                   ),
                   child: ListView.builder(
                     physics: BouncingScrollPhysics(),
                     itemCount: categoryProvider.categoryList.length,
-                    padding: EdgeInsets.all(0),
+                    padding: EdgeInsets.only(top: 0.0,left: 0.0,bottom: 0.0),
                     itemBuilder: (context, index) {
                       Category _category = categoryProvider.categoryList[index];
                       return InkWell(
@@ -68,9 +68,21 @@ class AllCategoryScreen extends StatelessWidget {
                     }
                     if(index == 0) {
                       return Ink(
-                        color: Theme.of(context).highlightColor,
+                        decoration: BoxDecoration(
+                          color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
+                          border: Border(
+                            top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                            bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                          )
+                        ),
                         child: ListTile(
-                          title: Text(getTranslated('all', context), style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(getTranslated('all', context), style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                              Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
+                            ],
+                          ),
                           trailing: Icon(Icons.navigate_next),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
@@ -83,21 +95,41 @@ class AllCategoryScreen extends StatelessWidget {
                       );
                     }else if (_subCategory.subSubCategories.length != 0) {
                       return Ink(
-                        color: Theme.of(context).highlightColor,
+                        decoration: BoxDecoration(
+                            color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
+                            border: Border(
+                              top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                              bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                            )
+                        ),
                         child: Theme(
                           data: Provider.of<ThemeProvider>(context).darkTheme ? ThemeData.dark() : ThemeData.light(),
                           child: ExpansionTile(
                             key: Key('${Provider.of<CategoryProvider>(context).categorySelectedIndex}$index'),
-                            title: Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
+                            // title: Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
+                                  Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
+                                ],
+                              ),
                             children: _getSubSubCategories(context, _subCategory),
                           ),
                         ),
                       );
                     } else {
                       return Ink(
-                        color: Theme.of(context).highlightColor,
+                        color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
                         child: ListTile(
-                          title: Text(_subCategory.name, style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                          // title: Text(_subCategory.name, style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(_subCategory.name, style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                              Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
+                            ],
+                          ),
                           trailing: Icon(Icons.navigate_next, color: Theme.of(context).textTheme.bodyText1.color),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
@@ -189,12 +221,13 @@ class CategoryItem extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
-      margin: EdgeInsets.symmetric(vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL, horizontal: 2),
+      // width: 100,
+      width: MediaQuery.of(context).size.width,
+      height: 130,
+      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isSelected ? ColorResources.getPrimary(context) : null,
+        //borderRadius: BorderRadius.circular(10),
+        color: isSelected ?ColorResources.getIconBg(context) : null,//ColorResources.getPrimary(context) : null,
       ),
       child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -218,7 +251,7 @@ class CategoryItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
             child: Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: titilliumSemiBold.copyWith(
               fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-              color: isSelected ? Theme.of(context).highlightColor : Theme.of(context).hintColor,
+              color: isSelected ? Provider.of<ThemeProvider>(context).darkTheme?Colors.white:Theme.of(context).hintColor : Theme.of(context).hintColor,
             )),
           ),
         ]),

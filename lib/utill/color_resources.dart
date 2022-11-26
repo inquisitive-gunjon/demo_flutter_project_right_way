@@ -63,7 +63,8 @@ class ColorResources {
     return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF49698c) : Color(0xFF7DB6F5);
   }
   static Color getPrimary(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFf0f0f0) : Theme.of(context).primaryColor;
+    // return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFf0f0f0) : Theme.of(context).primaryColor;
+    return Provider.of<ThemeProvider>(context).darkTheme ? ColorResources.getIconBg(context) : Theme.of(context).primaryColor;
   }
   static Color getSearchBg(BuildContext context) {
     return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF585a5c) : Color(0xFFF4F7FC);
