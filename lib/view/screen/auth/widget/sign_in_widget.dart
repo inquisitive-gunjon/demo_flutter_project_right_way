@@ -196,7 +196,9 @@ class _SignInWidgetState extends State<SignInWidget> {
             GestureDetector(
               onTap: () {
                 if (!Provider.of<AuthProvider>(context, listen: false).isLoading) {
+
                   Provider.of<CartProvider>(context, listen: false).getCartData();
+
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()),
                           (route) => false);
                 }

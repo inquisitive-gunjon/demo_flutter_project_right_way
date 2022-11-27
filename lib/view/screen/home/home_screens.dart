@@ -116,42 +116,42 @@ class _HomePageState extends State<HomePage> {
                 controller: _scrollController,
                 slivers: [
                   // App Bar
-                  SliverAppBar(
-                    floating: true,
-                    elevation: 0,
-                    centerTitle: false,
-                    automaticallyImplyLeading: false,
-                    backgroundColor: Theme.of(context).highlightColor,
-                    title: Image.asset(Images.logo_with_name_image, height: 35),
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
-                        child: IconButton(
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
-                          },
-                          icon: Stack(clipBehavior: Clip.none, children: [
-                            Image.asset(
-                              Images.cart_arrow_down_image,
-                              height: Dimensions.ICON_SIZE_DEFAULT,
-                              width: Dimensions.ICON_SIZE_DEFAULT,
-                              color: ColorResources.getPrimary(context),
-                            ),
-                            Positioned(top: -4, right: -4,
-                              child: Consumer<CartProvider>(builder: (context, cart, child) {
-                                return CircleAvatar(radius: 7, backgroundColor: ColorResources.RED,
-                                  child: Text(cart.cartList.length.toString(),
-                                      style: titilliumSemiBold.copyWith(color: ColorResources.WHITE, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                                      )),
-                                );
-                              }),
-                            ),
-                          ]),
-                        ),
-                      ),
-
-
-                    ],
-                  ),
+                  // SliverAppBar(
+                  //   floating: true,
+                  //   elevation: 0,
+                  //   centerTitle: false,
+                  //   automaticallyImplyLeading: false,
+                  //   backgroundColor: Theme.of(context).highlightColor,
+                  //   title: Image.asset(Images.logo_with_name_image, height: 35),
+                  //   actions: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(right: 12.0),
+                  //       child: IconButton(
+                  //         onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
+                  //         },
+                  //         icon: Stack(clipBehavior: Clip.none, children: [
+                  //           Image.asset(
+                  //             Images.cart_arrow_down_image,
+                  //             height: Dimensions.ICON_SIZE_DEFAULT,
+                  //             width: Dimensions.ICON_SIZE_DEFAULT,
+                  //             color: ColorResources.getPrimary(context),
+                  //           ),
+                  //           Positioned(top: -4, right: -4,
+                  //             child: Consumer<CartProvider>(builder: (context, cart, child) {
+                  //               return CircleAvatar(radius: 7, backgroundColor: ColorResources.RED,
+                  //                 child: Text(cart.cartList.length.toString(),
+                  //                     style: titilliumSemiBold.copyWith(color: ColorResources.WHITE, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                  //                     )),
+                  //               );
+                  //             }),
+                  //           ),
+                  //         ]),
+                  //       ),
+                  //     ),
+                  //
+                  //
+                  //   ],
+                  // ),
 
                   // Search Button
                   SliverPersistentHeader(

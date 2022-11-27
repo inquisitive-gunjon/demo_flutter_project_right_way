@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/onboarding_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/auth/auth_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -88,7 +91,14 @@ class OnBoardingScreen extends StatelessWidget {
                         onPressed: () {
                           if (Provider.of<OnBoardingProvider>(context, listen: false).selectedIndex == onBoardingList.onBoardingList.length - 1) {
                             Provider.of<SplashProvider>(context, listen: false).disableIntro();
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+                            //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => AuthScreen()));
+                            if (!Provider.of<AuthProvider>(context, listen: false).isLoading) {
+
+                              Provider.of<CartProvider>(context, listen: false).getCartData();
+
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()),
+                                      (route) => false);
+                            }
                           } else {
                             _pageController.animateToPage(Provider.of<OnBoardingProvider>(context, listen: false).selectedIndex+1, duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
                           }

@@ -20,6 +20,7 @@ class SplashRepo {
   }
 
   void initSharedData() async {
+
     if (!sharedPreferences.containsKey(AppConstants.CART_LIST)) {
       sharedPreferences.setStringList(AppConstants.CART_LIST, []);
     }

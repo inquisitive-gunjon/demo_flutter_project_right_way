@@ -57,6 +57,7 @@ class BannersView extends StatelessWidget {
 
     }
   }
+  final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,20 +69,29 @@ class BannersView extends StatelessWidget {
             List<String> bannerList=BannerModelClass().bannerList;
             double _width = MediaQuery.of(context).size.width;
             return Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
               width: _width,
-              height: _width * 0.4,
+              height: _width * 0.35,
               child: bannerProvider.mainBannerList != null ? bannerProvider.mainBannerList.length != 0 ? Stack(
                 fit: StackFit.expand,
                 children: [
                   CarouselSlider.builder(
+                    carouselController: _controller,
                     options: CarouselOptions(
-                      viewportFraction: 1,
                       autoPlay: true,
-                      enlargeCenterPage: true,
+                      //enlargeCenterPage: true,
+                      aspectRatio: 2.0,
+                      // onPageChanged: (index, reason) {
+                      //   setState(() {
+                      //     _current = index;
+                      //   });
+                      // }
+                      viewportFraction: 1,
                       disableCenter: true,
                       onPageChanged: (index, reason) {
                         Provider.of<BannerProvider>(context, listen: false).setCurrentIndex(index);
                       },
+
                     ),
                     // itemCount: bannerProvider.mainBannerList.length == 0 ? 1 : bannerProvider.mainBannerList.length,
                     itemCount: bannerList.length,
@@ -96,9 +106,9 @@ class BannersView extends StatelessWidget {
                           //     bannerProvider.mainBannerList[index].resourceType);
                         },
                         child: Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
                             child: Image.asset(bannerImage,fit: BoxFit.cover,),
                             // FadeInImage.assetNetwork(
                             //   placeholder: Images.placeholder, fit: BoxFit.cover,
@@ -118,8 +128,8 @@ class BannersView extends StatelessWidget {
                     right: 0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: bannerProvider.mainBannerList.map((banner) {
-                        int index = bannerProvider.mainBannerList.indexOf(banner);
+                      children: bannerList.map((banner) {
+                        int index = bannerList.indexOf(banner);
                         return TabPageSelectorIndicator(
                           backgroundColor: index == bannerProvider.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
                           borderColor: index == bannerProvider.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
