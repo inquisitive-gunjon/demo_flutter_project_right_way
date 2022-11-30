@@ -71,7 +71,7 @@ class BannersView extends StatelessWidget {
             return Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
               width: _width,
-              height: _width * 0.35,
+              height: _width * 0.295,
               child: bannerProvider.mainBannerList != null ? bannerProvider.mainBannerList.length != 0 ? Stack(
                 fit: StackFit.expand,
                 children: [

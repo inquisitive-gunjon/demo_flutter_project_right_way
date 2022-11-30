@@ -19,9 +19,9 @@ class CategoryView extends StatelessWidget {
         GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
-            crossAxisSpacing: 15,
+            crossAxisSpacing: 5,
             mainAxisSpacing: 5,
-            childAspectRatio: (1/1.3),
+            childAspectRatio: (1/1.4),
           ),
           itemCount: isHomePage
               ? categoryProvider.categoryList.length > 8

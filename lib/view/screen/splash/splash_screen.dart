@@ -43,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             textAlign: TextAlign.center,
           ),
         ));
+
         if(!isNotConnected) {
            _route();
           // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
@@ -51,7 +52,8 @@ class _SplashScreenState extends State<SplashScreen> {
       _firstTime = false;
     });
 
-    _route();
+     _route();
+    // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
     // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
   }
 
@@ -94,6 +96,7 @@ class _SplashScreenState extends State<SplashScreen> {
               }
             }
           }
+
         });
       }
 

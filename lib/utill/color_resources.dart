@@ -70,7 +70,8 @@ class ColorResources {
     return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFF585a5c) : Color(0xFFF4F7FC);
   }
   static Color getArrowButtonColor(BuildContext context) {
-    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFBE8551) : Color(0xFFFE8551);
+    // return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFBE8551) : Color(0xFFFE8551);
+    return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFBE8551) : Color(0xFFE80F0F);
   }
   static Color getReviewRattingColor(BuildContext context) {
     return Provider.of<ThemeProvider>(context).darkTheme ? Color(0xFFF4F7FC) : Color(0xFF66717C);

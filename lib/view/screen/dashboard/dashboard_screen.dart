@@ -54,16 +54,26 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       },
       child: Scaffold(
         key: _scaffoldKey,
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Theme.of(context).textTheme.bodyText1.color,
-          showUnselectedLabels: true,
-          currentIndex: _pageIndex,
-          type: BottomNavigationBarType.fixed,
-          items: _getBottomWidget(singleVendor),
-          onTap: (int index) {
-            _setPage(index);
-          },
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.grey.shade400,
+                blurRadius: 5,
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            selectedItemColor: Theme.of(context).primaryColor,
+            unselectedItemColor: Theme.of(context).textTheme.bodyText1.color,
+            showUnselectedLabels: true,
+            currentIndex: _pageIndex,
+            type: BottomNavigationBarType.fixed,
+            items: _getBottomWidget(singleVendor),
+            onTap: (int index) {
+              _setPage(index);
+            },
+          ),
         ),
         body: PageView.builder(
           controller: _pageController,
@@ -99,10 +109,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     if(!isSingleVendor){
       _list.add(_barItem(Images.home_image, getTranslated('home', context), 0));
-      _list.add(_barItem(Images.message_image, getTranslated('inbox', context), 1));
+      // _list.add(_barItem(Images.message_image, getTranslated('inbox', context), 1));
       _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 2));
-      _list.add(_barItem(Images.notification, getTranslated('notification', context), 3));
-      _list.add(_barItem(Images.more_image, getTranslated('more', context), 4));
+      // _list.add(_barItem(Images.notification, getTranslated('notification', context), 3));
+      _list.add(_barItem(Images.notification, getTranslated('PROFILE', context), 3));
+      // _list.add(_barItem(Images.more_image, getTranslated('more', context), 4));
+      _list.add(_barItem(Images.more_image, getTranslated('CART', context), 4));
     }else{
       _list.add(_barItem(Images.home_image, getTranslated('home', context), 0));
       _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 1));

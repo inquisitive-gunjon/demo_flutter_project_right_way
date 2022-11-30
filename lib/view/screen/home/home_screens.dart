@@ -100,7 +100,8 @@ class _HomePageState extends State<HomePage> {
 
    List<String> types =[getTranslated('new_arrival', context),getTranslated('top_product', context), getTranslated('best_selling', context),  getTranslated('discounted_product', context)];
     return Scaffold(
-      backgroundColor: ColorResources.getHomeBg(context),
+      // backgroundColor: ColorResources.getHomeBg(context),
+      backgroundColor: Colors.grey.shade50,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: RefreshIndicator(
@@ -171,6 +172,8 @@ class _HomePageState extends State<HomePage> {
                                 decoration: BoxDecoration(color: Theme.of(context).cardColor,
                                   boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
                                   900 : 200], spreadRadius: 1, blurRadius: 1)],
+                                  // border: Border.all(color: Color(0xff242424)),
+                                  border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
                                 child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
 
@@ -180,9 +183,12 @@ class _HomePageState extends State<HomePage> {
                                   // ),
                                   //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
                                   // ),
-                                  Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
+                                  // Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
+                                  // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
+                                  Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
                                   Text(getTranslated('SEARCH_HINT', context),
-                                      style: robotoRegular.copyWith(color: Theme.of(context).hintColor)),
+                                      style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
+                                  ),
 
                                   // Container(
                                   //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
@@ -400,7 +406,7 @@ class _HomePageState extends State<HomePage> {
 
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                            child: TitleRow(title: getTranslated('mobile_products', context),
+                            child: CustomTitleRow(title: getTranslated('mobile_products', context),
                                 onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
@@ -408,12 +414,156 @@ class _HomePageState extends State<HomePage> {
                           LatestProductView(scrollController: _scrollController),
                           SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('computer_&_it', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('fragrances', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('networking', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('ladies_fashion', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('featured_deals', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('health_&_herbs', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('kids_fashion', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('car_&_vehicles', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('stationery_&_office', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('electrical_&_lighting', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('electronics_&_appliances', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('robotics_and_artificial_intelligence', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('software_service_&_solution', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: CustomTitleRow(title: getTranslated('winter_collection', context),
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                    productType: ProductType.MOBILE_PRODUCT)));}),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          LatestProductView(scrollController: _scrollController),
+                          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
+                          //Hide category wise product view
                           //Home category
-                          HomeCategoryProductView(isHomePage: true),
+                          // HomeCategoryProductView(isHomePage: true),
                           SizedBox(height: Dimensions.HOME_PAGE_PADDING),
-
-
 
                           //footer banner
                           Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){

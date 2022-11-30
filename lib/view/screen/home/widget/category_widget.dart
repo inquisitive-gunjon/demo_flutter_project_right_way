@@ -14,15 +14,17 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column( children: [
       Container(
-        height: MediaQuery.of(context).size.width/5,
+        height: MediaQuery.of(context).size.width/4,
         width: MediaQuery.of(context).size.width/5,
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).primaryColor.withOpacity(.2)),
-          borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL),
+          // borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+          borderRadius: BorderRadius.circular(2),
           color: Theme.of(context).highlightColor,
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL),
+          // borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_SMALL),
+          borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),
           child: FadeInImage.assetNetwork(
             fit: BoxFit.cover,
             placeholder: Images.placeholder,

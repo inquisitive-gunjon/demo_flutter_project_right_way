@@ -58,7 +58,7 @@ class HomeCategoryProductView extends StatelessWidget {
                                 ),
                               );
                             }),
-                      )
+                      ),
                     ],
                   );
                 })

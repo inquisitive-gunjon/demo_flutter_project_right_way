@@ -27,10 +27,24 @@ class CustomTitleRow extends StatelessWidget {
     }
 
     return Container(
+      height: 40,
+      //margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      width: MediaQuery.of(context).size.width,
       decoration: isFlash? BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL)),
         color: Theme.of(context).primaryColor.withOpacity(.05),
-      ):null,
+        border: Border(right: BorderSide(width: 2,color: Colors.black)),
+        // color: ColorResources.getIconBg(context),
+        // color: Colors.red,
+      ):BoxDecoration(
+        //borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL)),
+        color: Colors.grey.shade300,
+        border: Border(left: BorderSide(width: 3,color: Colors.grey)),
+        // color: ColorResources.getIconBg(context),
+        // color: Colors.red,
+      ),
+      //color: isFlash?null:Colors.grey.shade300,
       child: Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
             isFlash?
@@ -38,7 +52,16 @@ class CustomTitleRow extends StatelessWidget {
               padding: isFlash?  EdgeInsets.only(left: Dimensions.PADDING_SIZE_EXTRA_SMALL):EdgeInsets.all(0),
               child: Image.asset(Images.flash_deal, scale: 4,),
             ):SizedBox(),
-            Text(title, style: titleHeader),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*.5,
+              child: Text(
+                title,
+                style: titleHeader,
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             Spacer(),
             eventDuration == null
                 ? Expanded(child: SizedBox.shrink())

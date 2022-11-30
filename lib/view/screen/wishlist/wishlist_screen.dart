@@ -44,7 +44,6 @@ class _WishListScreenState extends State<WishListScreen> {
       body: Column(
         children: [
           CustomAppBar(title: getTranslated('wishList', context)),
-
           Expanded(
             child: isGuestMode ? NotLoggedInWidget() :  Consumer<WishListProvider>(
               builder: (context, wishListProvider, child) {
@@ -55,7 +54,6 @@ class _WishListScreenState extends State<WishListScreen> {
                       context, Provider.of<LocalizationProvider>(context, listen: false).locale.countryCode,
                     );
                   },
-
                   child: ListView.builder(
                     padding: EdgeInsets.all(0),
                     itemCount: wishListProvider.wishList.length,
