@@ -14,6 +14,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider_ukrbd/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/brand_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_deal_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/flash_deals_view.dart';
@@ -60,6 +62,8 @@ class _HomePageState extends State<HomePage> {
      Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
      Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
      Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context);
+     ///ukrbd
+     Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
      Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
      Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
      Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context);
@@ -220,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: CategoryView(isHomePage: true),
+                            child: CategoryViewUkrbd(isHomePage: true),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
@@ -302,9 +306,9 @@ class _HomePageState extends State<HomePage> {
 
 
                           // Featured Products
-                          Consumer<ProductProvider>(
-                            builder: (context, featured,_) {
-                              return featured.featuredProductList!=null && featured.featuredProductList.length>0 ?
+                          Consumer<CategoryProviderUkrbd>(
+                            builder: (context, categoryProviderUkrbd,_) {
+                              return categoryProviderUkrbd.categoryList!=null && categoryProviderUkrbd.categoryList.length>0 ?
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: Padding(

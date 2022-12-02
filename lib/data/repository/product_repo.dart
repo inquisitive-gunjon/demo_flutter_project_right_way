@@ -50,6 +50,8 @@ class ProductRepo {
   }
 
   Future<ApiResponse> getBrandOrCategoryProductList(bool isBrand, String id) async {
+    print(isBrand);
+    print(id);
     try {
       String uri;
       if(isBrand){

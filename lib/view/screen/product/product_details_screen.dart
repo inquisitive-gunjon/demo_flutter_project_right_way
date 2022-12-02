@@ -56,6 +56,9 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+
+    print(widget.productId);
+
     ScrollController _scrollController = ScrollController();
     _loadData(context);
     return WillPopScope(

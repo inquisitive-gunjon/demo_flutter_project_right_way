@@ -97,6 +97,10 @@ class BannersView extends StatelessWidget {
                     itemCount: bannerList.length,
                     itemBuilder: (context, index, _) {
                       String bannerImage=bannerList[index].toString();
+
+                      // print('${Provider.of<SplashProvider>(context,listen: false).baseUrls.bannerImageUrl}'
+                      //           '/${bannerProvider.mainBannerList[index].photo}');
+
                       return InkWell(
                         onTap: () {
                           // _clickBannerRedirect(context,

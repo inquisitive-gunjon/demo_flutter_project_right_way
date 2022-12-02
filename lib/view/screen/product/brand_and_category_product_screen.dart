@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/ukrbd_response/Products.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart'
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/no_internet_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_shimmer.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_widget_ukrbd.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +19,8 @@ class BrandAndCategoryProductScreen extends StatelessWidget {
   final String id;
   final String name;
   final String image;
-  BrandAndCategoryProductScreen({@required this.isBrand, @required this.id, @required this.name, this.image});
+  final List<Products> productsList;
+  BrandAndCategoryProductScreen({@required this.isBrand, @required this.id, @required this.name, this.image,this.productsList});
   @override
   Widget build(BuildContext context) {
     Provider.of<ProductProvider>(context, listen: false).initBrandOrCategoryProductList(isBrand, id, context);
@@ -49,7 +52,8 @@ class BrandAndCategoryProductScreen extends StatelessWidget {
             SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
             // Products
-            productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
+            // productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
+            productsList.length > 0 ? Expanded(
               child: StaggeredGridView.countBuilder(
                 padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
                 physics: BouncingScrollPhysics(),
@@ -58,7 +62,8 @@ class BrandAndCategoryProductScreen extends StatelessWidget {
                 shrinkWrap: true,
                 staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
                 itemBuilder: (BuildContext context, int index) {
-                  return ProductWidget(productModel: productProvider.brandOrCategoryProductList[index]);
+                  print("print product");
+                  return ProductWidgetUkrbd(productModel: productsList[index]);
                 },
               ),
             ) :

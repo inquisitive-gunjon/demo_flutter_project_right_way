@@ -4,6 +4,10 @@ class AppConstants {
   static const String APP_NAME = 'Ukrbd';
   static const String APP_VERSION = '12.0';
   static const String BASE_URL = 'https://6valley.6amtech.com';
+  /// for ukrbd
+  static const String UKRBD_BASE_URL = 'https://ukrbd.mycompile.xyz';
+
+
   static const String USER_ID = 'userId';
   static const String NAME = 'name';
   static const String CATEGORIES_URI = '/api/v1/categories';
@@ -93,6 +97,11 @@ class AppConstants {
   static const String SEARCH_LOCATION_URI = '/api/v1/mapapi/place-api-autocomplete';
   static const String PLACE_DETAILS_URI = '/api/v1/mapapi/place-api-details';
   static const String DISTANCE_MATRIX_URI = '/api/v1/mapapi/distance-api';
+
+
+  //Ukrbd.com
+  static const String UKRBD_CATEGORIES_URI = '/api/category';
+
 
 
   // sharePreference

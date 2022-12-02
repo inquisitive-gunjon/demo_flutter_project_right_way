@@ -15,6 +15,12 @@ class MensFashionProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
+
+
     int offset = 1;
     scrollController?.addListener(() {
       if(scrollController.position.maxScrollExtent == scrollController.position.pixels
@@ -26,8 +32,8 @@ class MensFashionProductView extends StatelessWidget {
 
         if(offset < pageSize) {
           offset++;
-          print('end of the page');
-          Provider.of<ProductProvider>(context, listen: false).showBottomLoader();
+
+      Provider.of<ProductProvider>(context, listen: false).showBottomLoader();
 
           Provider.of<ProductProvider>(context, listen: false).getLatestProductList(offset, context);
         }
