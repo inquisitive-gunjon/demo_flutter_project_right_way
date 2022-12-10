@@ -70,13 +70,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
   ///https://ukrbd.mycompile.xyz
-  sl.registerLazySingleton(() => DioClientUkrbd(AppConstants.UKRBD_BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
+  //sl.registerLazySingleton(() => DioClientUkrbd(AppConstants.UKRBD_BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
 
 
   // Repository
   sl.registerLazySingleton(() => CategoryRepo(dioClient: sl()));
   ///ukrbd
-  sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
+  //sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
   sl.registerLazySingleton(() => HomeCategoryProductRepo(dioClient: sl()));
   sl.registerLazySingleton(() => TopSellerRepo(dioClient: sl()));
   sl.registerLazySingleton(() => FlashDealRepo(dioClient: sl()));
@@ -104,7 +104,7 @@ Future<void> init() async {
   // Provider
   sl.registerFactory(() => CategoryProvider(categoryRepo: sl()));
   ///ukrbd  CategoryProviderUkrbd
-  sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
+  //sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
 
   sl.registerFactory(() => HomeCategoryProductProvider(homeCategoryProductRepo: sl()));
   sl.registerFactory(() => TopSellerProvider(topSellerRepo: sl()));

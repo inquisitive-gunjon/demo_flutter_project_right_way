@@ -1,20 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/ukrbd_response/Categories.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/ukrbd_response/Subcategories.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider_ukrbd/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen_ukrbd.dart';
 import 'package:provider/provider.dart';
 
 class AllCategoryScreen extends StatelessWidget {
@@ -29,7 +25,7 @@ class AllCategoryScreen extends StatelessWidget {
 
           CustomAppBar(title: getTranslated('CATEGORY', context)),
 
-          Expanded(child: Consumer<CategoryProviderUkrbd>(
+          Expanded(child: Consumer<CategoryProvider>(
             builder: (context, categoryProvider, child) {
               return categoryProvider.categoryList.length != 0 ? Row(children: [
 
@@ -47,13 +43,12 @@ class AllCategoryScreen extends StatelessWidget {
                     itemCount: categoryProvider.categoryList.length,
                     padding: EdgeInsets.only(top: 0.0,left: 0.0,bottom: 0.0),
                     itemBuilder: (context, index) {
-                      Categories _category = categoryProvider.categoryList[index];
+                      Category _category = categoryProvider.categoryList[index];
                       return InkWell(
-                        onTap: () => Provider.of<CategoryProviderUkrbd>(context, listen: false).changeSelectedIndex(index),
+                        onTap: () => Provider.of<CategoryProvider>(context, listen: false).changeSelectedIndex(index),
                         child: CategoryItem(
-                          title: _category.category,
-                          // icon: _category.icon,
-                          icon: "https://cdn-icons-png.flaticon.com/512/2603/2603910.png",//Icon(),
+                          title: _category.name,
+                          icon: _category.icon,
                           isSelected: categoryProvider.categorySelectedIndex == index,
                         ),
                       );
@@ -64,21 +59,21 @@ class AllCategoryScreen extends StatelessWidget {
 
                 Expanded(child: ListView.builder(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  itemCount: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].subcategories.length+1,
+                  itemCount: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].subCategories.length+1,
                   itemBuilder: (context, index) {
 
-                    Subcategories _subCategory;
+                    SubCategory _subCategory;
                     if(index != 0) {
-                      _subCategory = categoryProvider.categoryList[categoryProvider.categorySelectedIndex].subcategories[index-1];
+                      _subCategory = categoryProvider.categoryList[categoryProvider.categorySelectedIndex].subCategories[index-1];
                     }
                     if(index == 0) {
                       return Ink(
                         decoration: BoxDecoration(
-                          color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
-                          border: Border(
-                            top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
-                            bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
-                          )
+                            color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
+                            border: Border(
+                              top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                              bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                            )
                         ),
                         child: ListTile(
                           title: Row(
@@ -90,43 +85,40 @@ class AllCategoryScreen extends StatelessWidget {
                           ),
                           trailing: Icon(Icons.navigate_next),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
                               isBrand: false,
                               id: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].id.toString(),
-                              name: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].category,
-                              productsList: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].products,
+                              name: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].name,
                             )));
                           },
                         ),
                       );
-                    }
-                    // else if (_subCategory.subSubCategories.length != 0) {
-                    //   return Ink(
-                    //     decoration: BoxDecoration(
-                    //         color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
-                    //         border: Border(
-                    //           top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
-                    //           bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
-                    //         )
-                    //     ),
-                    //     child: Theme(
-                    //       data: Provider.of<ThemeProvider>(context).darkTheme ? ThemeData.dark() : ThemeData.light(),
-                    //       child: ExpansionTile(
-                    //         key: Key('${Provider.of<CategoryProvider>(context).categorySelectedIndex}$index'),
-                    //         // title: Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
-                    //           title: Row(
-                    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //             children: [
-                    //               Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
-                    //               Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
-                    //             ],
-                    //           ),
-                    //         children: _getSubSubCategories(context, _subCategory),
-                    //       ),
-                    //     ),
-                    //   );
-                    // }
-                    else {
+                    }else if (_subCategory.subSubCategories.length != 0) {
+                      return Ink(
+                        decoration: BoxDecoration(
+                            color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
+                            border: Border(
+                              top: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                              bottom: BorderSide(color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,),
+                            )
+                        ),
+                        child: Theme(
+                          data: Provider.of<ThemeProvider>(context).darkTheme ? ThemeData.dark() : ThemeData.light(),
+                          child: ExpansionTile(
+                            key: Key('${Provider.of<CategoryProvider>(context).categorySelectedIndex}$index'),
+                            // title: Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(_subCategory.name, style: titilliumSemiBold.copyWith(color: Theme.of(context).textTheme.bodyText1.color), maxLines: 2, overflow: TextOverflow.ellipsis),
+                                Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
+                              ],
+                            ),
+                            children: _getSubSubCategories(context, _subCategory),
+                          ),
+                        ),
+                      );
+                    } else {
                       return Ink(
                         color: ColorResources.getIconBg(context),//Theme.of(context).highlightColor,//
                         child: ListTile(
@@ -134,7 +126,7 @@ class AllCategoryScreen extends StatelessWidget {
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(_subCategory.subCategory, style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
+                              Text(_subCategory.name, style: titilliumSemiBold, maxLines: 2, overflow: TextOverflow.ellipsis),
                               Container(height: MediaQuery.of(context).size.width*.11,width: 1,color: Provider.of<ThemeProvider>(context).darkTheme?Theme.of(context).highlightColor:Colors.grey.shade300,)
                             ],
                           ),
@@ -143,7 +135,7 @@ class AllCategoryScreen extends StatelessWidget {
                             Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
                               isBrand: false,
                               id: _subCategory.id.toString(),
-                              name: _subCategory.subCategory,
+                              name: _subCategory.name,
                             )));
                           },
                         ),
@@ -250,8 +242,7 @@ class CategoryItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: FadeInImage.assetNetwork(
                 placeholder: Images.placeholder, fit: BoxFit.cover,
-                // image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.categoryImageUrl}/$icon',
-                image: '$icon',
+                image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.categoryImageUrl}/$icon',
                 imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover),
               ),
             ),

@@ -57,7 +57,7 @@ class MensFashionProductView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: productList.length,
                 itemBuilder: (ctx,index){
-                  return Container(width: (MediaQuery.of(context).size.width/2)-20,
+                  return Container(width: (MediaQuery.of(context).size.width/2.06)-20,
                       child: ProductWidget(productModel: productList[index]));
 
                 }) :

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +35,13 @@ class CategoryView extends StatelessWidget {
 
             return InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
-                  isBrand: false,
-                  id: categoryProvider.categoryList[index].id.toString(),
-                  name: categoryProvider.categoryList[index].name,
-                )));
+                Provider.of<CategoryProvider>(context, listen: false).changeSelectedIndex(index);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
+                // Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
+                //   isBrand: false,
+                //   id: categoryProvider.categoryList[index].id.toString(),
+                //   name: categoryProvider.categoryList[index].name,
+                // )));
               },
               child: CategoryWidget(category: categoryProvider.categoryList[index]),
             );

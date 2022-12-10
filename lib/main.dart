@@ -74,7 +74,7 @@ Future<void> main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => di.sl<CategoryProvider>()),
       ///ukrbd
-      ChangeNotifierProvider(create: (context) => di.sl<CategoryProviderUkrbd>()),
+      // ChangeNotifierProvider(create: (context) => di.sl<CategoryProviderUkrbd>()),
 
       ///
       ChangeNotifierProvider(create: (context) => di.sl<HomeCategoryProductProvider>()),

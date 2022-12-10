@@ -61,16 +61,10 @@ class ProductWidget extends StatelessWidget {
 
                 child: Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(productModel.name ?? '', textAlign: TextAlign.center,
-                          style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL,
-                          fontWeight: FontWeight.w400), maxLines: 2,
-                          overflow: TextOverflow.ellipsis),
-                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
-                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                      Row(mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             RatingBar(
                               rating: double.parse(ratting),
@@ -78,12 +72,32 @@ class ProductWidget extends StatelessWidget {
                             ),
 
 
-                        Text('(${productModel.reviewCount.toString() ?? 0})',
-                            style: robotoRegular.copyWith(
-                              fontSize: Dimensions.FONT_SIZE_SMALL,
-                            )),
+                            Text('(${productModel.reviewCount.toString() ?? 0})',
+                                style: robotoRegular.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_SMALL,
+                                )),
 
-                      ]),
+                          ]),
+                      Text(productModel.name ?? '', textAlign: TextAlign.start,
+                          style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL,
+                          fontWeight: FontWeight.w400), maxLines: 2,
+                          overflow: TextOverflow.ellipsis),
+                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                      // Row(mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       RatingBar(
+                      //         rating: double.parse(ratting),
+                      //         size: 18,
+                      //       ),
+                      //
+                      //
+                      //   Text('(${productModel.reviewCount.toString() ?? 0})',
+                      //       style: robotoRegular.copyWith(
+                      //         fontSize: Dimensions.FONT_SIZE_SMALL,
+                      //       )),
+                      //
+                      // ]),
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
 
