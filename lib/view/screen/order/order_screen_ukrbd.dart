@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/ProductDetailsScreenUkrbd.dart';
 
 class OrderScreenUkrbd extends StatefulWidget {
   const OrderScreenUkrbd({Key key}) : super(key: key);
@@ -51,7 +53,7 @@ class _OrderScreenUkrbdState extends State<OrderScreenUkrbd> with SingleTickerPr
                 //   },
                 //   icon: icon,
                 // ),
-                Text("Orders",style: TextStyle(fontSize: 25),)
+                Text("Orders",style: TextStyle(fontSize: Dimensions.FONT_SIZE_OVER_LARGE),)
               ],
             ),
           ),
@@ -109,7 +111,7 @@ class OrderInfoWidget extends StatelessWidget {
     return Container(
       //height: size.height,
       width: size.width,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,36 +129,44 @@ class OrderInfoWidget extends StatelessWidget {
             shrinkWrap: true,
             itemCount: orderList.length,
             itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              height: size.width*.3,
-              width: size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,//ColorResources.getIconBg(context),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("${orderList[index].invoiceNumber}"),
-                      Text("${orderList[index].productName}",style: TextStyle(fontSize: 20),textAlign: TextAlign.start,),
-                      Text("${orderList[index].date}"),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text("${orderList[index].productPrice}",style: TextStyle(fontSize: 20),),
-                      Text("${orderList[index].productStatus}"),
-                    ],
-                  )
-                ],
+            return InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetailsScreenUkrbd()));
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 4),
+                height: size.width*.28,
+                width: size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.white,//ColorResources.getIconBg(context),
+                  border: Border.all(width: 1,color: Colors.black26)
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("${orderList[index].invoiceNumber}",style: TextStyle(color: Colors.blue.shade200,fontSize: Dimensions.FONT_SIZE_DEFAULT),),
+                        Text("${orderList[index].productName}",style: TextStyle(fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE),textAlign: TextAlign.start,),
+                        Text("${orderList[index].date}",style: TextStyle(fontSize: Dimensions.FONT_SIZE_SMALL),),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text("${orderList[index].productPrice}",style: TextStyle(fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE),),
+                        SizedBox(height: 10,),
+                        Text("${orderList[index].productStatus}",style: TextStyle(fontSize: Dimensions.FONT_SIZE_SMALL),),
+                        SizedBox(height: 10,),
+                      ],
+                    )
+                  ],
+                ),
               ),
             );
           },

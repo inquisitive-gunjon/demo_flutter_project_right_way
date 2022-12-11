@@ -1,0 +1,449 @@
+
+
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
+import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class CartScreenUkrbd extends StatefulWidget {
+  const CartScreenUkrbd({Key key}) : super(key: key);
+
+  @override
+  _CartScreenUkrbdState createState() => _CartScreenUkrbdState();
+}
+
+class _CartScreenUkrbdState extends State<CartScreenUkrbd> {
+
+
+  int counter=0;
+
+
+  @override
+  Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: ColorResources.getHomeBg(context),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   title: Text("Cart"),
+      // ),
+      body:SafeArea(
+        top: true,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: size.width*(12/360)),
+              height: size.width*(50/360),
+              width: size.width,
+              decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
+              ),
+              child:Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Icon(Icons.arrow_back,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),),
+                      SizedBox(width: size.width*(12/360),),
+                      Text("Cart",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_EXTRA_LARGE/360) ),),
+
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text("Clear Cart",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_SMALL/360) ),),
+                      InkWell(onTap: (){
+
+                      },child: Icon(Icons.delete,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),)),
+                    ],
+                  )
+
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(15/360)),
+                    height: size.width*(60/360),
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
+                    ),
+                    child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+
+                        Icon(Icons.check_box,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Theme.of(context).primaryColor,),
+                        SizedBox(width: size.width*(25/360),),
+                        Text("Mobile",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360))),
+
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(15/360),vertical: size.width*(8/360)),
+                    margin: EdgeInsets.symmetric(vertical: size.width*(8/360)),
+                    //height: size.width*(60/360),
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
+                    ),
+                    child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+
+                        Icon(Icons.check_box,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Theme.of(context).primaryColor,),
+                        SizedBox(width: size.width*(25/360),),
+                        // Text("Mobile",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360))),
+                        ClipRRect(borderRadius: BorderRadius.circular(0),
+                          child:FadeInImage.assetNetwork(
+                            placeholder: Images.placeholder, width: size.width*(40/360),
+                            height: size.width*(50/360), fit: BoxFit.cover,
+                            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtLFlEKjQHLInSZGzlfwIAnCrqCOF3chDGhR6ZKfSw&s',
+                            imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder,
+                                width: size.width*(40/360), height: size.width*(50/360), fit: BoxFit.cover),
+                          ),),
+                        SizedBox(width: size.width*(18/360),),
+                        Expanded(child: Text("Argentina Jersey (MDKFHJSH-BLUE PRINTED)",style: TextStyle(fontSize: size.width*(Dimensions.FONT_SIZE_DEFAULT/360)),overflow: TextOverflow.clip,)),
+                        Expanded(child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: size.width*(35/360),
+                              width: size.width*(65/360),
+                              color: Theme.of(context).primaryColor,
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Positioned(
+                                    left: size.width*(-17.5/360),
+                                    top: 0,
+                                    bottom: 0,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            if(counter>0){
+                                              --counter;
+                                            }
+                                          });
+                                        },
+                                        child: Container(
+                                          height: size.width*(35/360),
+                                          width: size.width*(35/360),
+                                          // color: Colors.white,
+                                          //alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.deepPurpleAccent,
+                                                spreadRadius: 2,
+                                                offset: Offset(0, 0),
+                                              ),
+                                            ]
+                                          ),
+                                          child: Center(
+                                              child: Icon(FontAwesomeIcons.minus,size: size.width*(Dimensions.FONT_SIZE_DEFAULT/360),)
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: size.width*(-17.5/360),
+                                    top: 0,
+                                    bottom: 0,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            ++counter;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: size.width*(35/360),
+                                          width: size.width*(35/360),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.deepPurpleAccent,
+                                                  spreadRadius: 2,
+                                                  offset: Offset(0, 0),
+                                                ),
+                                              ]
+                                          ),
+                                          child: Center(
+                                            child: Icon(FontAwesomeIcons.plus,size: size.width*(Dimensions.FONT_SIZE_DEFAULT/360),),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(alignment: Alignment.center,child: Text("${counter}")),
+                                ],
+                              ),
+                            )
+                          ],
+                        ))
+
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: size.width*(16/360),),
+
+                  // Container(
+                  //   width: size.width,
+                  //   //height: 100,
+                  //   decoration: DottedDecoration(
+                  //     shape: Shape.line,
+                  //     linePosition: LinePosition.top,
+                  //     color: Colors.grey,
+                  //     strokeWidth: 2
+                  //   ),
+                  // ),
+
+                  Ink(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(16/360),vertical: size.width*(8/360)),
+                    width: size.width,
+                    height: size.width*(150/360),
+                    // color: Colors.red,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Sub Total",style: TextStyle(fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360),fontWeight: FontWeight.bold),),
+                            RichText(
+                                 text: TextSpan(
+                                   text: '',
+                                   style: DefaultTextStyle.of(context).style,
+                                   children:  <TextSpan>[
+                                     TextSpan(text: '\$ ', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                     TextSpan(text: '260', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360))),
+                                   ],
+                                 ),
+                               ),
+
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Delivery Charge",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                            RichText(
+                              text: TextSpan(
+                                text: '',
+                                style: DefaultTextStyle.of(context).style,
+                                children:  <TextSpan>[
+                                  TextSpan(text: '\$ ', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                  TextSpan(text: '260', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                ],
+                              ),
+                            ),
+
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("VAT +SD (if Applicable)",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                            RichText(
+                              text: TextSpan(
+                                text: '',
+                                style: DefaultTextStyle.of(context).style,
+                                children:  <TextSpan>[
+                                  TextSpan(text: '\$ ', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                  TextSpan(text: '260', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                ],
+                              ),
+                            ),
+
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Discount",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                            RichText(
+                              text: TextSpan(
+                                text: '',
+                                style: DefaultTextStyle.of(context).style,
+                                children:  <TextSpan>[
+                                  TextSpan(text: '\$ ', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                  TextSpan(text: '260', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                ],
+                              ),
+                            ),
+
+                          ],
+                        ),Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Promo Discount",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                            RichText(
+                              text: TextSpan(
+                                text: '',
+                                style: DefaultTextStyle.of(context).style,
+                                children:  <TextSpan>[
+                                  TextSpan(text: '\$ ', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                  TextSpan(text: '260', style: TextStyle(color: Colors.deepOrangeAccent,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                ],
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(16/360),vertical: size.width*(8/360)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+
+                        Icon(FontAwesomeIcons.boxArchive,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Theme.of(context).primaryColor,),
+                        SizedBox(width: size.width*(10/360),),
+                        Text("Select a promo code",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360),color: Theme.of(context).primaryColor)),
+
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(16/360),vertical: size.width*(8/360)),
+                    child: Text("ADDITIONAL COMMENTS",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360),color: Colors.grey)),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(16/360),vertical: size.width*(8/360)),
+                    child: TextFormField(
+                      //style: TextFormField,
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey.shade200,
+                        hoverColor: Colors.grey.shade200,
+                        focusColor: Colors.grey.shade200,
+                        focusedBorder: OutlineInputBorder( //<-- SEE HERE
+                          borderSide: BorderSide(
+                              width: 3, color: Colors.grey.shade200),
+                        ),
+                        enabledBorder: OutlineInputBorder( //<-- SEE HERE
+                          borderSide: BorderSide(
+                              width: 3, color: Colors.grey.shade200),
+                        ),
+                        // fillColor: Colors.white,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderSide:
+                          const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                      ),
+
+                    ),
+                  ),
+
+                  // SizedBox(height: size.width*(80/360),),
+                  //
+                  // Container(
+                  //   height: 600,
+                  //   width: size.width,
+                  //   color: Colors.teal,
+                  // )
+
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: size.width*(16/360),vertical: size.width*(5/360)),
+              color: Theme.of(context).primaryColor.withOpacity(.08),
+              height: size.width*(90/360),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: '',
+                        style: DefaultTextStyle.of(context).style,
+                        children:  <TextSpan>[
+                          TextSpan(text: 'By selecting Checkout, I agree to the\n', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                          TextSpan(text: 'Terms of Service', style: TextStyle(color: Colors.red,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                          TextSpan(text: ' and ', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                          TextSpan(text: 'Privacy Policy', style: TextStyle(color: Colors.red,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: size.width*(15/360)),
+                    height: size.width*(45/360),
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                        border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
+                    ),
+                    child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(Images.cart_image,height: size.width*(18/360),width: size.width*(18/360),fit: BoxFit.cover,color: Colors.black54,),
+                        //Icon(Icons.cart,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Colors.white,),
+                        SizedBox(width: size.width*(25/360),),
+                        // Text("Mobile",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360),color: Colors.white)),
+
+                        RichText(
+                          text: TextSpan(
+                            text: '',
+                            style: DefaultTextStyle.of(context).style,
+                            children:  <TextSpan>[
+                              TextSpan(text: ' 234.5 1', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)),),
+                              TextSpan(text: 'items', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                              ],
+                          ),
+                        ),
+                        Expanded(child: Align(alignment: Alignment.centerRight,child: Text("Checkout",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)))))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

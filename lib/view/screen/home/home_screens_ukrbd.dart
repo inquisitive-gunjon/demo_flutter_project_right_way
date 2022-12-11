@@ -27,6 +27,7 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_vie
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/footer_banner.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/latest_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/mens_fashion_product_view.dart.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
 import 'package:provider/provider.dart';

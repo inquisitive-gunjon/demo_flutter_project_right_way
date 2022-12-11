@@ -97,51 +97,51 @@ class _ProductViewUkrbdState extends State<ProductViewUkrbd> {
         return Column(
           //controller: _scrollController,
             children: [
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverDelegate(
-                  child: InkWell(
-                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
-                    child: Container(padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL,),
-                      color: ColorResources.getHomeBg(context),
-                      alignment: Alignment.center,
-                      child: Container(padding: EdgeInsets.only(
-                        left: Dimensions.HOME_PAGE_PADDING, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                        top: Dimensions.PADDING_SIZE_EXTRA_SMALL, bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                      ),
-                        height: 60, alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(color: Theme.of(context).cardColor,
-                          boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
-                          900 : 200], spreadRadius: 1, blurRadius: 1)],
-                          // border: Border.all(color: Color(0xff242424)),
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
-                        child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
-
-                          // Container(
-                          //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
-                          //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
-                          // ),
-                          //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
-                          // ),
-                          // Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
-                          // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
-                          Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
-                          Text(getTranslated('SEARCH_HINT', context),
-                            style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
-                          ),
-
-                          // Container(
-                          //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
-                          //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
-                          // ),
-                          //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
-                          // ),
-                        ]),
-                      ),
-                    ),
-                  ),),),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   delegate: SliverDelegate(
+              //     child: InkWell(
+              //       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
+              //       child: Container(padding: EdgeInsets.symmetric(
+              //           horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL,),
+              //         color: ColorResources.getHomeBg(context),
+              //         alignment: Alignment.center,
+              //         child: Container(padding: EdgeInsets.only(
+              //           left: Dimensions.HOME_PAGE_PADDING, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+              //           top: Dimensions.PADDING_SIZE_EXTRA_SMALL, bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+              //         ),
+              //           height: 60, alignment: Alignment.centerLeft,
+              //           decoration: BoxDecoration(color: Theme.of(context).cardColor,
+              //             boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
+              //             900 : 200], spreadRadius: 1, blurRadius: 1)],
+              //             // border: Border.all(color: Color(0xff242424)),
+              //             border: Border.all(color: Colors.grey),
+              //             borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
+              //           child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
+              //
+              //             // Container(
+              //             //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+              //             //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+              //             // ),
+              //             //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+              //             // ),
+              //             // Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
+              //             // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
+              //             Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
+              //             Text(getTranslated('SEARCH_HINT', context),
+              //               style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
+              //             ),
+              //
+              //             // Container(
+              //             //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+              //             //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+              //             // ),
+              //             //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+              //             // ),
+              //           ]),
+              //         ),
+              //       ),
+              //     ),),),
 
           !prodProvider.filterFirstLoading ? productList.length != 0 ?
           StaggeredGridView.countBuilder(

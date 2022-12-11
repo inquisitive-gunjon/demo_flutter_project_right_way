@@ -56,6 +56,8 @@ dependencies:
   fluttertoast: ^8.0.9
   permission_handler: ^10.0.0
   flutter_downloader: ^1.8.0+1
+  font_awesome_flutter: ^10.3.0
+#  dotted_decoration: ^2.0.0
 
 
 

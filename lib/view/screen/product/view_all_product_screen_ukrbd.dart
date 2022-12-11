@@ -18,9 +18,17 @@ class AllProductScreenUkrbd extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+
+
       backgroundColor: ColorResources.getHomeBg(context),
       resizeToAvoidBottomInset: false,
+
+
+
       appBar: AppBar(
+
+
+
         backgroundColor: Provider.of<ThemeProvider>(context).darkTheme ?
         Colors.black : Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
@@ -32,6 +40,9 @@ class AllProductScreenUkrbd extends StatelessWidget {
         title: Text(productType == ProductType.MENS_FASHION_PRODUCT ?
         "Men's Fashion ":productType == ProductType.MOBILE_PRODUCT?'Mobile':'Latest Product',
             style: titilliumRegular.copyWith(fontSize: 20, color: ColorResources.WHITE)),
+
+
+
       ),
 
       body: SafeArea(

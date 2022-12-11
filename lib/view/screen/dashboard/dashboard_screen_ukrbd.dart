@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/chat/inbox_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/notification/notificatio
 import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/profile/profile_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/profile/profile_screen_ukrbd.dart';
 import 'package:provider/provider.dart';
 
 class DashBoardScreenUkrbd extends StatefulWidget {
@@ -42,8 +44,8 @@ class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
       HomePageUkrbd(),
       // OrderScreen(isBacButtonExist: false),
       OrderScreenUkrbd(),
-      ProfileScreen(),
-      CartScreen(),
+      ProfileScreenUkrbd(),
+      CartScreenUkrbd(),
     ];
     NetworkInfo.checkConnectivity(context);
   }
@@ -126,7 +128,7 @@ class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
       // _list.add(_barItem(Images.notification, getTranslated('notification', context), 3));
       _list.add(_barItem(Images.profile_icon_image, getTranslated('PROFILE', context), 2));
       // _list.add(_barItem(Images.more_image, getTranslated('more', context), 4));
-      _list.add(_barItem(Images.more_image, getTranslated('CART', context), 3));
+      _list.add(_barItem(Images.cart_image, getTranslated('CART', context), 3));
     }else{
       _list.add(_barItem(Images.home_image, getTranslated('home', context), 0));
       _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 1));
