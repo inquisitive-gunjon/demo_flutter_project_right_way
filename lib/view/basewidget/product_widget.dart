@@ -61,10 +61,16 @@ class ProductWidget extends StatelessWidget {
 
                 child: Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(mainAxisAlignment: MainAxisAlignment.start,
+                      Text(productModel.name ?? '', textAlign: TextAlign.center,
+                          style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL,
+                          fontWeight: FontWeight.w400), maxLines: 2,
+                          overflow: TextOverflow.ellipsis),
+                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+
+                      Row(mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RatingBar(
                               rating: double.parse(ratting),
@@ -72,32 +78,12 @@ class ProductWidget extends StatelessWidget {
                             ),
 
 
-                            Text('(${productModel.reviewCount.toString() ?? 0})',
-                                style: robotoRegular.copyWith(
-                                  fontSize: Dimensions.FONT_SIZE_SMALL,
-                                )),
+                        Text('(${productModel.reviewCount.toString() ?? 0})',
+                            style: robotoRegular.copyWith(
+                              fontSize: Dimensions.FONT_SIZE_SMALL,
+                            )),
 
-                          ]),
-                      Text(productModel.name ?? '', textAlign: TextAlign.start,
-                          style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL,
-                          fontWeight: FontWeight.w400), maxLines: 2,
-                          overflow: TextOverflow.ellipsis),
-                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
-                      // Row(mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       RatingBar(
-                      //         rating: double.parse(ratting),
-                      //         size: 18,
-                      //       ),
-                      //
-                      //
-                      //   Text('(${productModel.reviewCount.toString() ?? 0})',
-                      //       style: robotoRegular.copyWith(
-                      //         fontSize: Dimensions.FONT_SIZE_SMALL,
-                      //       )),
-                      //
-                      // ]),
+                      ]),
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
 
@@ -138,8 +124,6 @@ class ProductWidget extends StatelessWidget {
                 color: ColorResources.getPrimary(context),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
               ),
-
-
               child: Center(
                 child: Text(PriceConverter.percentageCalculation(context, productModel.unitPrice,
                       productModel.discount, productModel.discountType),

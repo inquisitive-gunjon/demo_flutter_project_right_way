@@ -14,38 +14,21 @@ import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider_ukrbd/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_text_button.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/basewidget/title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/brand/all_brand_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/featureddeal/featured_deal_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/brand_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view_ukrbd.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_deal_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_product_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/flash_deals_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/footer_banner.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/home_category_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/latest_product_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/main_section_banner.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/mens_fashion_product_view.dart.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/flashdeal/flash_deal_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/recommended_product_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/top_seller_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/topSeller/all_top_seller_screen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -62,8 +45,6 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
     Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
     Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
     Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context);
-    ///ukrbd
-    // Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
     Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
     Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
     Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context);
@@ -157,53 +138,52 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                   //
                   //   ],
                   // ),
-
                   // Search Button
                   SliverPersistentHeader(
-                      pinned: true,
-                      delegate: SliverDelegate(
-                          child: InkWell(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
-                            child: Container(padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL),
-                              color: ColorResources.getHomeBg(context),
-                              alignment: Alignment.center,
-                              child: Container(padding: EdgeInsets.only(
-                                left: Dimensions.HOME_PAGE_PADDING, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                                top: Dimensions.PADDING_SIZE_EXTRA_SMALL, bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-                              ),
-                                height: 60, alignment: Alignment.centerLeft,
-                                decoration: BoxDecoration(color: Theme.of(context).cardColor,
-                                  boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
-                                  900 : 200], spreadRadius: 1, blurRadius: 1)],
-                                  // border: Border.all(color: Color(0xff242424)),
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
-                                child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
+                    pinned: true,
+                    delegate: SliverDelegate(
+                      child: InkWell(
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
+                        child: Container(padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL),
+                          color: ColorResources.getHomeBg(context),
+                          alignment: Alignment.center,
+                          child: Container(padding: EdgeInsets.only(
+                            left: Dimensions.HOME_PAGE_PADDING, right: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+                            top: Dimensions.PADDING_SIZE_EXTRA_SMALL, bottom: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+                          ),
+                            height: 60, alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(color: Theme.of(context).cardColor,
+                              boxShadow: [BoxShadow(color: Colors.grey[Provider.of<ThemeProvider>(context).darkTheme ?
+                              900 : 200], spreadRadius: 1, blurRadius: 1)],
+                              // border: Border.all(color: Color(0xff242424)),
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL),),
+                            child: Row(mainAxisAlignment : MainAxisAlignment.start, children: [
 
-                                  // Container(
-                                  //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
-                                  //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
-                                  // ),
-                                  //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
-                                  // ),
-                                  // Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
-                                  // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
-                                  Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
-                                  Text(getTranslated('SEARCH_HINT', context),
-                                    style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
-                                  ),
-
-                                  // Container(
-                                  //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
-                                  //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
-                                  // ),
-                                  //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
-                                  // ),
-                                ]),
+                              // Container(
+                              //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+                              //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+                              // ),
+                              //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+                              // ),
+                              // Icon(Icons.search, color: Theme.of(context).primaryColor, size: Dimensions.ICON_SIZE_LARGE),
+                              // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
+                              Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
+                              Text(getTranslated('SEARCH_HINT', context),
+                                style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
                               ),
-                            ),
-                          ))),
+
+                              // Container(
+                              //   width: 40,height: 40,decoration: BoxDecoration(color: Theme.of(context).primaryColor,
+                              //     borderRadius: BorderRadius.all(Radius.circular(Dimensions.PADDING_SIZE_EXTRA_SMALL))
+                              // ),
+                              //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
+                              // ),
+                            ]),
+                          ),
+                        ),
+                      ),),),
 
                   SliverToBoxAdapter(
                     child: Padding(
@@ -306,15 +286,15 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
 
 
                           // Featured Products
-                          Consumer<CategoryProvider>(
-                              builder: (context, categoryProvider,_) {
-                                return categoryProvider.categoryList!=null && categoryProvider.categoryList.length>0 ?
+                          Consumer<ProductProvider>(
+                              builder: (context, featured,_) {
+                                return featured.featuredProductList!=null && featured.featuredProductList.length>0 ?
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
                                     child: CustomTitleRow(title: getTranslated("mens_fashion", context),
-                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(productType: ProductType.MENS_FASHION_PRODUCT)));}),
+                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(productType: ProductType.MENS_FASHION_PRODUCT)));}),
                                   ),
                                 ):SizedBox();
                               }
@@ -401,7 +381,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           // Padding(
                           //   padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                           //   child: TitleRow(title: getTranslated('latest_products', context),
-                          //       onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                          //       onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                           //           productType: ProductType.LATEST_PRODUCT)));}),
                           // ),
                           // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -411,7 +391,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('mobile_products', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -421,7 +401,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('computer_&_it', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -431,7 +411,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('fragrances', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -441,7 +421,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('networking', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -451,7 +431,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('ladies_fashion', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -461,7 +441,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('featured_deals', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -471,7 +451,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('health_&_herbs', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -481,7 +461,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('kids_fashion', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -491,7 +471,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('car_&_vehicles', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -501,7 +481,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('stationery_&_office', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -511,7 +491,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('electrical_&_lighting', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -521,7 +501,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('electronics_&_appliances', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -531,7 +511,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('robotics_and_artificial_intelligence', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -541,7 +521,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('software_service_&_solution', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -551,7 +531,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 7,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                             child: CustomTitleRow(title: getTranslated('winter_collection', context),
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(
+                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(
                                     productType: ProductType.MOBILE_PRODUCT)));}),
                           ),
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),

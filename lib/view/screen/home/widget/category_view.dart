@@ -35,6 +35,7 @@ class CategoryView extends StatelessWidget {
 
             return InkWell(
               onTap: () {
+
                 Provider.of<CategoryProvider>(context, listen: false).changeSelectedIndex(index);
                 Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
                 // Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(

@@ -6,15 +6,13 @@ import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/no_internet_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/auth/auth_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/maintenance/maintenance_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/onboarding/onboarding_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/splash/widget/splash_painter.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -78,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
             if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
               Provider.of<AuthProvider>(context, listen: false).updateToken(context);
               Provider.of<ProfileProvider>(context, listen: false).getUserInfo(context);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreen()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => DashBoardScreenUkrbd()));
             } else {
               if(Provider.of<SplashProvider>(context, listen: false).showIntro()) {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => OnBoardingScreen(
@@ -89,17 +87,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
                   Provider.of<CartProvider>(context, listen: false).getCartData();
 
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()),
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreenUkrbd()),
                           (route) => false);
                 }
                 //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => AuthScreen()));
               }
             }
           }
-
         });
       }
-
     });
   }
 

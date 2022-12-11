@@ -27,6 +27,7 @@ class Images {
   static const String language = 'assets/images/language.png';
   static const String notification_filled = 'assets/images/notification_filled.png';
   static const String notification = 'assets/images/notification.png';
+  static const String profile_icon_image = 'assets/images/profile_icon_image.png';
   static const String offers = 'assets/images/offers.png';
   static const String preference = 'assets/images/preference.png';
   static const String privacy_policy = 'assets/images/privacy_policy.png';

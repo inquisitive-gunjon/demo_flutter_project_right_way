@@ -14,7 +14,6 @@ import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider_ukrbd/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -30,7 +29,6 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/brand_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_deal_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/featured_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/flash_deals_view.dart';
@@ -59,19 +57,17 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadData(BuildContext context, bool reload) async {
     await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
-     Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
-     Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
-     Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context);
-     ///ukrbd
-     Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
-     Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
-     Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
-     Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context);
-     Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: reload);
-     Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, reload: reload);
-     Provider.of<FeaturedDealProvider>(context, listen: false).getFeaturedDealList(reload, context);
-     Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, reload: reload);
-     Provider.of<ProductProvider>(context, listen: false).getRecommendedProduct(context);
+    Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
+    Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
+    Provider.of<CategoryProvider>(context, listen: false).getCategoryList(reload, context);
+    Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
+    Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
+    Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context);
+    Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: reload);
+    Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, reload: reload);
+    Provider.of<FeaturedDealProvider>(context, listen: false).getFeaturedDealList(reload, context);
+    Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, reload: reload);
+    Provider.of<ProductProvider>(context, listen: false).getRecommendedProduct(context);
   }
 
   void passData(int index, String title) {
@@ -102,7 +98,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
 
-   List<String> types =[getTranslated('new_arrival', context),getTranslated('top_product', context), getTranslated('best_selling', context),  getTranslated('discounted_product', context)];
+    List<String> types =[getTranslated('new_arrival', context),getTranslated('top_product', context), getTranslated('best_selling', context),  getTranslated('discounted_product', context)];
     return Scaffold(
       // backgroundColor: ColorResources.getHomeBg(context),
       backgroundColor: Colors.grey.shade50,
@@ -157,13 +153,12 @@ class _HomePageState extends State<HomePage> {
                   //
                   //   ],
                   // ),
-
                   // Search Button
                   SliverPersistentHeader(
                       pinned: true,
                       delegate: SliverDelegate(
                           child: InkWell(
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SearchScreen())),
                             child: Container(padding: EdgeInsets.symmetric(
                                 horizontal: Dimensions.HOME_PAGE_PADDING, vertical: Dimensions.PADDING_SIZE_SMALL),
                               color: ColorResources.getHomeBg(context),
@@ -191,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                                   // Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_LARGE),
                                   Icon(Icons.search, color: ColorResources.getArrowButtonColor(context), size: Dimensions.ICON_SIZE_DEFAULT),
                                   Text(getTranslated('SEARCH_HINT', context),
-                                      style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
+                                    style: robotoRegular.copyWith(color: Theme.of(context).hintColor),
                                   ),
 
                                   // Container(
@@ -200,10 +195,10 @@ class _HomePageState extends State<HomePage> {
                                   // ),
                                   //   child: Icon(Icons.search, color: Theme.of(context).cardColor, size: Dimensions.ICON_SIZE_SMALL),
                                   // ),
-                            ]),
-                          ),
-                        ),
-                      ))),
+                                ]),
+                              ),
+                            ),
+                          ),),),
 
                   SliverToBoxAdapter(
                     child: Padding(
@@ -224,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: CategoryViewUkrbd(isHomePage: true),
+                            child: CategoryView(isHomePage: true),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
@@ -306,18 +301,18 @@ class _HomePageState extends State<HomePage> {
 
 
                           // Featured Products
-                          Consumer<CategoryProviderUkrbd>(
-                            builder: (context, categoryProviderUkrbd,_) {
-                              return categoryProviderUkrbd.categoryList!=null && categoryProviderUkrbd.categoryList.length>0 ?
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
-                                  child: CustomTitleRow(title: getTranslated("mens_fashion", context),
-                                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(productType: ProductType.MENS_FASHION_PRODUCT)));}),
-                                ),
-                              ):SizedBox();
-                            }
+                          Consumer<ProductProvider>(
+                              builder: (context, featured,_) {
+                                return featured.featuredProductList!=null && featured.featuredProductList.length>0 ?
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
+                                    child: CustomTitleRow(title: getTranslated("mens_fashion", context),
+                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreen(productType: ProductType.MENS_FASHION_PRODUCT)));}),
+                                  ),
+                                ):SizedBox();
+                              }
                           ),
 
                           // Padding(

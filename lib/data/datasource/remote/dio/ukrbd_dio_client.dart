@@ -14,7 +14,8 @@ class DioClientUkrbd {
   String token;
   String countryCode;
 
-  DioClientUkrbd(this.baseUrl,
+  DioClientUkrbd(
+      this.baseUrl,
       Dio dioC, {
         this.loggingInterceptor,
         this.sharedPreferences,

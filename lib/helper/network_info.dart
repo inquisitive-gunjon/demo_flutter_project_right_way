@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';

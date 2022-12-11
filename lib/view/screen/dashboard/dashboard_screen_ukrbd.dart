@@ -1,44 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/chat/inbox_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/home_screens.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/home_screens_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/more/more_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/notification/notification_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_screen_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 
-class DashBoardScreen extends StatefulWidget {
+class DashBoardScreenUkrbd extends StatefulWidget {
 
   @override
-  _DashBoardScreenState createState() => _DashBoardScreenState();
+  _DashBoardScreenUkrbdState createState() => _DashBoardScreenUkrbdState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> {
+class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
   PageController _pageController = PageController();
   int _pageIndex = 0;
   List<Widget> _screens ;
   GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
-
   bool singleVendor = false;
   @override
   void initState() {
     super.initState();
     singleVendor = Provider.of<SplashProvider>(context, listen: false).configModel.businessMode == "single";
 
+    // _screens = [
+    //   HomePageUkrbd(),
+    //   singleVendor?OrderScreen(isBacButtonExist: false): InboxScreen(isBackButtonExist: false) ,
+    //   singleVendor? NotificationScreen(isBacButtonExist: false): OrderScreen(isBacButtonExist: false),
+    //   singleVendor? MoreScreen(): NotificationScreen(isBacButtonExist: false),
+    //   singleVendor?SizedBox(): MoreScreen(),
+    // ];
+
     _screens = [
       HomePageUkrbd(),
-      singleVendor?OrderScreen(isBacButtonExist: false): InboxScreen(isBackButtonExist: false) ,
-      singleVendor?NotificationScreen(isBacButtonExist: false): OrderScreen(isBacButtonExist: false),
-      singleVendor?MoreScreen(): NotificationScreen(isBacButtonExist: false),
-      singleVendor?SizedBox(): MoreScreen(),
+      // OrderScreen(isBacButtonExist: false),
+      OrderScreenUkrbd(),
+      ProfileScreen(),
+      CartScreen(),
     ];
-
     NetworkInfo.checkConnectivity(context);
-
   }
 
   @override
@@ -71,6 +78,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             type: BottomNavigationBarType.fixed,
             items: _getBottomWidget(singleVendor),
             onTap: (int index) {
+              print("index index index :-------------- ${index}");
               _setPage(index);
             },
           ),
@@ -99,6 +107,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   void _setPage(int pageIndex) {
     setState(() {
+      print("index index index :-------------- ${pageIndex}");
+      print("index index index :-------------- ${pageIndex}");
+      print("index index index :-------------- ${pageIndex}");
+      print("index index index :-------------- ${pageIndex}");
+      print("index index index :-------------- ${pageIndex}");
       _pageController.jumpToPage(pageIndex);
       _pageIndex = pageIndex;
     });
@@ -106,15 +119,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   List<BottomNavigationBarItem> _getBottomWidget(bool isSingleVendor) {
     List<BottomNavigationBarItem> _list = [];
-
     if(!isSingleVendor){
       _list.add(_barItem(Images.home_image, getTranslated('home', context), 0));
       // _list.add(_barItem(Images.message_image, getTranslated('inbox', context), 1));
-      _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 2));
+      _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 1));
       // _list.add(_barItem(Images.notification, getTranslated('notification', context), 3));
-      _list.add(_barItem(Images.notification, getTranslated('PROFILE', context), 3));
+      _list.add(_barItem(Images.profile_icon_image, getTranslated('PROFILE', context), 2));
       // _list.add(_barItem(Images.more_image, getTranslated('more', context), 4));
-      _list.add(_barItem(Images.cart_image, getTranslated('CART', context), 4));
+      _list.add(_barItem(Images.more_image, getTranslated('CART', context), 3));
     }else{
       _list.add(_barItem(Images.home_image, getTranslated('home', context), 0));
       _list.add(_barItem(Images.shopping_image, getTranslated('orders', context), 1));

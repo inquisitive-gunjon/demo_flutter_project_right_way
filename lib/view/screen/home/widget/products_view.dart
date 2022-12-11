@@ -82,7 +82,6 @@ class ProductView extends StatelessWidget {
 
         return Column(children: [
 
-
           !prodProvider.filterFirstLoading ? productList.length != 0 ?
            StaggeredGridView.countBuilder(
             itemCount: isHomePage? productList.length>4?

@@ -5,6 +5,7 @@ class LoggingInterceptor extends InterceptorsWrapper {
 
   @override
   Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+
     print("--> ${options.method} ${options.path}");
     print("Headers: ${options.headers.toString()}");
     print("<-- END HTTP");
@@ -14,9 +15,8 @@ class LoggingInterceptor extends InterceptorsWrapper {
 
   @override
   Future onResponse(Response response, ResponseInterceptorHandler handler) async {
-    print(
-        "<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
 
+    print("<-- ${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.path}");
     String responseAsString = response.data.toString();
 
     if (responseAsString.length > maxCharactersPerLine) {
@@ -43,4 +43,5 @@ class LoggingInterceptor extends InterceptorsWrapper {
     print("ERROR[${err?.response?.statusCode}] => PATH: ${err?.requestOptions?.path}");
     return super.onError(err, handler);
   }
+
 }
