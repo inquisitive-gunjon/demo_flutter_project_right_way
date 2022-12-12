@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/ukrbd_response/Categories.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../data/model/response/categories_ukrbd.dart';
 class CategoryWidgetUkrbd extends StatelessWidget {
   final Categories category;
   const CategoryWidgetUkrbd({Key key, @required this.category}) : super(key: key);

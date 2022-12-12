@@ -11,6 +11,7 @@ import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/auth/auth_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen_ukrbd.dart';
 import 'package:provider/provider.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -96,7 +97,7 @@ class OnBoardingScreen extends StatelessWidget {
 
                               Provider.of<CartProvider>(context, listen: false).getCartData();
 
-                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreen()),
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => DashBoardScreenUkrbd()),
                                       (route) => false);
                             }
                           } else {

@@ -5,12 +5,13 @@ class AppConstants {
   static const String APP_VERSION = '12.0';
   static const String BASE_URL = 'https://6valley.6amtech.com';
   /// for ukrbd
-  static const String UKRBD_BASE_URL = 'https://ukrbd.mycompile.xyz';
+  static const String UKRBD_BASE_URL = 'http://ukrbd.com';
 
 
   static const String USER_ID = 'userId';
   static const String NAME = 'name';
   static const String CATEGORIES_URI = '/api/v1/categories';
+  static const String CATEGORIES_URI_UKRBD = '/api/category';
   static const String BRANDS_URI = '/api/v1/brands';
   static const String BRAND_PRODUCT_URI = '/api/v1/brands/products/';
   static const String CATEGORY_PRODUCT_URI = '/api/v1/categories/products/';

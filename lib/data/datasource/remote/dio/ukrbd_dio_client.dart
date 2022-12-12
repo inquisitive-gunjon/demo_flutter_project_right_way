@@ -32,7 +32,7 @@ class DioClientUkrbd {
       ..options.headers = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
-        AppConstants.LANG_KEY : countryCode == 'US'? 'en':countryCode.toLowerCase(),
+        //AppConstants.LANG_KEY : countryCode == 'US'? 'en':countryCode.toLowerCase(),
 
       };
     dio.interceptors.add(loggingInterceptor);

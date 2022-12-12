@@ -23,7 +23,6 @@ import 'package:flutter_sixvalley_ecommerce/data/repository/seller_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/splash_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/support_ticket_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/top_seller_repo.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/ukrbd_category_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/wallet_transaction_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/wishlist_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
@@ -32,6 +31,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/coupon_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/facebook_login_provider.dart';
@@ -55,12 +55,12 @@ import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/wallet_transaction_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/wishlist_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider_ukrbd/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/app_constants.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/datasource/remote/dio/logging_interceptor.dart';
+import 'data/repository/category_repo_ukrbd.dart';
 import 'data/repository/home_category_product_repo.dart';
 
 final sl = GetIt.instance;
@@ -70,13 +70,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => NetworkInfo(sl()));
   sl.registerLazySingleton(() => DioClient(AppConstants.BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
   ///https://ukrbd.mycompile.xyz
-  //sl.registerLazySingleton(() => DioClientUkrbd(AppConstants.UKRBD_BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(() => DioClientUkrbd(AppConstants.UKRBD_BASE_URL, sl(), loggingInterceptor: sl(), sharedPreferences: sl()));
 
 
   // Repository
   sl.registerLazySingleton(() => CategoryRepo(dioClient: sl()));
   ///ukrbd
-  //sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
+  sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
   sl.registerLazySingleton(() => HomeCategoryProductRepo(dioClient: sl()));
   sl.registerLazySingleton(() => TopSellerRepo(dioClient: sl()));
   sl.registerLazySingleton(() => FlashDealRepo(dioClient: sl()));
@@ -104,7 +104,7 @@ Future<void> init() async {
   // Provider
   sl.registerFactory(() => CategoryProvider(categoryRepo: sl()));
   ///ukrbd  CategoryProviderUkrbd
-  //sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
+  sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
 
   sl.registerFactory(() => HomeCategoryProductProvider(homeCategoryProductRepo: sl()));
   sl.registerFactory(() => TopSellerProvider(topSellerRepo: sl()));
