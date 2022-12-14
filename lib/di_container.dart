@@ -7,6 +7,7 @@ import 'package:flutter_sixvalley_ecommerce/data/repository/banner_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/brand_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/cart_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/data/repository/category_wise_product_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/chat_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/coupon_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/featured_deal_repo.dart';
@@ -21,6 +22,7 @@ import 'package:flutter_sixvalley_ecommerce/data/repository/profile_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/search_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/seller_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/splash_repo.dart';
+import 'package:flutter_sixvalley_ecommerce/data/repository/sub_category_wise_product_repo_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/support_ticket_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/top_seller_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/wallet_transaction_repo.dart';
@@ -31,6 +33,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/coupon_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/facebook_login_provider.dart';
@@ -75,6 +78,10 @@ Future<void> init() async {
   //sl.registerLazySingleton(() => CategoryRepo(dioClient: sl()));
   ///ukrbd
   sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
+  sl.registerLazySingleton(() => CategoryWiseProductRepoUkrbd(dioClient: sl()));
+  sl.registerLazySingleton(() => SubCategoryWiseProductRepoUkrbd(dioClient: sl()));
+
+
   sl.registerLazySingleton(() => HomeCategoryProductRepo(dioClient: sl()));
   sl.registerLazySingleton(() => TopSellerRepo(dioClient: sl()));
   sl.registerLazySingleton(() => FlashDealRepo(dioClient: sl()));
@@ -103,6 +110,7 @@ Future<void> init() async {
   // sl.registerFactory(() => CategoryProvider(categoryRepo: sl()));
   ///ukrbd  CategoryProviderUkrbd
   sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
+  sl.registerFactory(() => CategoryWiseProductProviderUkrbd(categoryWiseProductRepoUkrbd: sl()));
 
   sl.registerFactory(() => HomeCategoryProductProvider(homeCategoryProductRepo: sl()));
   sl.registerFactory(() => TopSellerProvider(topSellerRepo: sl()));

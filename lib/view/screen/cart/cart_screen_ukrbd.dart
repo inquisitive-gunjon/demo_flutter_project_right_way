@@ -401,36 +401,41 @@ class _CartScreenUkrbdState extends State<CartScreenUkrbd> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: size.width*(15/360)),
-                    height: size.width*(45/360),
-                    width: size.width,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                        border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
-                    ),
-                    child:Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(Images.cart_image,height: size.width*(18/360),width: size.width*(18/360),fit: BoxFit.cover,color: Colors.black54,),
-                        //Icon(Icons.cart,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Colors.white,),
-                        SizedBox(width: size.width*(25/360),),
-                        // Text("Mobile",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360),color: Colors.white)),
+                  GestureDetector(
+                    onTap: (){
 
-                        RichText(
-                          text: TextSpan(
-                            text: '',
-                            style: DefaultTextStyle.of(context).style,
-                            children:  <TextSpan>[
-                              TextSpan(text: ' 234.5 1', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)),),
-                              TextSpan(text: 'items', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
-                              ],
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: size.width*(15/360)),
+                      height: size.width*(45/360),
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                          border: Border(bottom: BorderSide(color: Colors.grey.shade300,width: 1))
+                      ),
+                      child:Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(Images.cart_image,height: size.width*(18/360),width: size.width*(18/360),fit: BoxFit.cover,color: Colors.black54,),
+                          //Icon(Icons.cart,size: size.width*(Dimensions.ICON_SIZE_DEFAULT/360),color: Colors.white,),
+                          SizedBox(width: size.width*(25/360),),
+                          // Text("Mobile",style: TextStyle(fontSize:size.width*(Dimensions.FONT_SIZE_LARGE/360),color: Colors.white)),
+
+                          RichText(
+                            text: TextSpan(
+                              text: '',
+                              style: DefaultTextStyle.of(context).style,
+                              children:  <TextSpan>[
+                                TextSpan(text: ' 234.5 1', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)),),
+                                TextSpan(text: 'items', style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_SMALL/360)),),
+                                ],
+                            ),
                           ),
-                        ),
-                        Expanded(child: Align(alignment: Alignment.centerRight,child: Text("Checkout",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)))))
-                      ],
+                          Expanded(child: Align(alignment: Alignment.centerRight,child: Text("Checkout",style: TextStyle(color: Colors.black54,fontSize: size.width*(Dimensions.FONT_SIZE_LARGE/360)))))
+                        ],
+                      ),
                     ),
                   ),
                 ],

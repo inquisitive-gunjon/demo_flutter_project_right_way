@@ -6,11 +6,13 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/facebook_login_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/featured_deal_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/google_sign_in_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/home_category_product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/location_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/sub_category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/wallet_transaction_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen_ukrbd.dart';
@@ -76,6 +78,8 @@ Future<void> main() async {
       // ChangeNotifierProvider(create: (context) => di.sl<CategoryProvider>()),
       ///ukrbd
       ChangeNotifierProvider(create: (context) => di.sl<CategoryProviderUkrbd>()),
+      ChangeNotifierProvider(create: (context) => di.sl<CategoryWiseProductProviderUkrbd>()),
+      ChangeNotifierProvider(create: (context) => di.sl<SubCategoryWiseProductProviderUkrbd>()),
 
       ///
       ChangeNotifierProvider(create: (context) => di.sl<HomeCategoryProductProvider>()),

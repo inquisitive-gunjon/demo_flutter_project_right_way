@@ -14,6 +14,7 @@ import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen_ukrbd.dart';
 import 'package:provider/provider.dart';
 
 class AllCategoryScreenUkrbd extends StatelessWidget {
@@ -88,7 +89,7 @@ class AllCategoryScreenUkrbd extends StatelessWidget {
                           ),
                           trailing: Icon(Icons.navigate_next),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
                               isBrand: false,
                               id: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].id.toString(),
                               name: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].category,
@@ -137,7 +138,7 @@ class AllCategoryScreenUkrbd extends StatelessWidget {
                           ),
                           trailing: Icon(Icons.navigate_next, color: Theme.of(context).textTheme.bodyText1.color),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
                               isBrand: false,
                               id: _subCategory.id.toString(),
                               name: _subCategory.subCategory,

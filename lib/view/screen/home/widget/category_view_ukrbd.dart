@@ -10,10 +10,15 @@ import 'package:provider/provider.dart';
 
 import 'category_shimmer.dart';
 
-class CategoryViewUkrbd extends StatelessWidget {
+class CategoryViewUkrbd extends StatefulWidget {
   final bool isHomePage;
   CategoryViewUkrbd({@required this.isHomePage});
 
+  @override
+  State<CategoryViewUkrbd> createState() => _CategoryViewUkrbdState();
+}
+
+class _CategoryViewUkrbdState extends State<CategoryViewUkrbd> {
   @override
   Widget build(BuildContext context) {
     return Consumer<CategoryProviderUkrbd>(
@@ -27,7 +32,7 @@ class CategoryViewUkrbd extends StatelessWidget {
             mainAxisSpacing: 5,
             childAspectRatio: (1/1.4),
           ),
-          itemCount: isHomePage
+          itemCount: widget.isHomePage
               ? categoryProvider.categoryList.length > 8
               ? 8
               : categoryProvider.categoryList.length

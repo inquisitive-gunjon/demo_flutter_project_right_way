@@ -9,10 +9,16 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_vie
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/products_view_ukrbd.dart';
 import 'package:provider/provider.dart';
 
-class AllProductScreenUkrbd extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
+class AllProductScreenUkrbd extends StatefulWidget {
   final ProductType productType;
   AllProductScreenUkrbd({@required this.productType});
+
+  @override
+  State<AllProductScreenUkrbd> createState() => _AllProductScreenUkrbdState();
+}
+
+class _AllProductScreenUkrbdState extends State<AllProductScreenUkrbd> {
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +43,8 @@ class AllProductScreenUkrbd extends StatelessWidget {
             color: ColorResources.WHITE),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(productType == ProductType.MENS_FASHION_PRODUCT ?
-        "Men's Fashion ":productType == ProductType.MOBILE_PRODUCT?'Mobile':'Latest Product',
+        title: Text(widget.productType == ProductType.MENS_FASHION_PRODUCT ?
+        "Men's Fashion ":widget.productType == ProductType.MOBILE_PRODUCT?'Mobile':'Latest Product',
             style: titilliumRegular.copyWith(fontSize: 20, color: ColorResources.WHITE)),
 
 
@@ -57,7 +63,7 @@ class AllProductScreenUkrbd extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                  child: ProductViewUkrbd(isHomePage: false , productType: productType, scrollController: _scrollController),
+                  child: ProductViewUkrbd(isHomePage: false , productType: widget.productType, scrollController: _scrollController),
                 ),
               ),
             ],

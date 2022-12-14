@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -8,10 +6,15 @@ import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../data/model/response/categories_ukrbd.dart';
-class CategoryWidgetUkrbd extends StatelessWidget {
+class CategoryWidgetUkrbd extends StatefulWidget {
   final Categories category;
   const CategoryWidgetUkrbd({Key key, @required this.category}) : super(key: key);
 
+  @override
+  State<CategoryWidgetUkrbd> createState() => _CategoryWidgetUkrbdState();
+}
+
+class _CategoryWidgetUkrbdState extends State<CategoryWidgetUkrbd> {
   @override
   Widget build(BuildContext context) {
     return Column( children: [
@@ -47,7 +50,7 @@ class CategoryWidgetUkrbd extends StatelessWidget {
       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
       Container(
         child: Center(
-          child: Text(category.category,
+          child: Text(widget.category.category,
             textAlign: TextAlign.center,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
