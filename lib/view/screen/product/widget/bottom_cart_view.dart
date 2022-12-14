@@ -31,9 +31,9 @@ class BottomCartView extends StatelessWidget {
           child: Stack(children: [
             GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context)=>CartScreen()
-                  ));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context)=>CartScreen()
+                  // ));
                 },
                 // child: Image.asset(Images.cart_arrow_down_image, color: ColorResources.getPrimary(context))),//
                 child: Image.asset(Images.cart_arrow_down_image, color: Color(0xffE80F0F))),

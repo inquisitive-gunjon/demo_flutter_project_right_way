@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class CategoryShimmer extends StatelessWidget {
               child: Shimmer.fromColors(
                 baseColor: Colors.grey[300],
                 highlightColor: Colors.grey[100],
-                enabled: Provider.of<CategoryProvider>(context).categoryList.length == 0,
+                enabled: Provider.of<CategoryProviderUkrbd>(context).categoryList.length == 0,
                 child: Container(decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
@@ -46,7 +47,7 @@ class CategoryShimmer extends StatelessWidget {
               child: Shimmer.fromColors(
                 baseColor: Colors.grey[300],
                 highlightColor: Colors.grey[100],
-                enabled: Provider.of<CategoryProvider>(context).categoryList.length == 0,
+                enabled: Provider.of<CategoryProviderUkrbd>(context).categoryList.length == 0,
                 child: Container(height: 10, color: Colors.white, margin: EdgeInsets.only(left: 15, right: 15)),
               ),
             )),

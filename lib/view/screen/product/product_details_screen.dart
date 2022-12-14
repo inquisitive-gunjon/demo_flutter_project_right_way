@@ -64,7 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return WillPopScope(
       onWillPop: () async{
         if(widget.isFromWishList){
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => WishListScreen()));
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => WishListScreen()));
         }else{
           Navigator.of(context).pop();
         }
@@ -76,8 +76,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         appBar: AppBar(title: Row(children: [
           InkWell(
             child: Icon(Icons.arrow_back_ios, color: Theme.of(context).cardColor, size: 20),
-            onTap: widget.isFromWishList? () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => WishListScreen())):
-                () => Navigator.pop(context),),
+            onTap: () => Navigator.pop(context),
+          ),
           SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
 
 
@@ -139,8 +139,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
 
 
-                        details.productDetailsModel.addedBy == 'seller' ?
-                        SellerView(sellerId: details.productDetailsModel.userId.toString()) : SizedBox.shrink(),
+                        // details.productDetailsModel.addedBy == 'seller' ?
+                        // SellerView(sellerId: details.productDetailsModel.userId.toString()) : SizedBox.shrink(),
 
 
 

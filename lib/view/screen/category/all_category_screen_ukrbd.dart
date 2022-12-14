@@ -48,7 +48,7 @@ class AllCategoryScreenUkrbd extends StatelessWidget {
                     itemBuilder: (context, index) {
                       Categories _category = categoryProvider.categoryList[index];
                       return InkWell(
-                        onTap: () => Provider.of<CategoryProvider>(context, listen: false).changeSelectedIndex(index),
+                        onTap: () => Provider.of<CategoryProviderUkrbd>(context, listen: false).changeSelectedIndex(index),
                         child: CategoryItem(
                           title: _category.category,
                           icon: _category.image,

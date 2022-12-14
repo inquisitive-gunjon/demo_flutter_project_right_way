@@ -11,7 +11,7 @@ class ApiChecker {
       Provider.of<ProfileProvider>(context,listen: false).clearHomeAddress();
       Provider.of<ProfileProvider>(context,listen: false).clearOfficeAddress();
       Provider.of<AuthProvider>(context,listen: false).clearSharedData();
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => AuthScreen()), (route) => false);
+      // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => AuthScreen()), (route) => false);
     }else {
       String _errorMessage;
       if (apiResponse.error is String) {

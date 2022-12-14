@@ -27,7 +27,7 @@ class FavouriteButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (isGuestMode) {
-          showAnimatedDialog(context, GuestDialog(), isFlip: true);
+          //showAnimatedDialog(context, GuestDialog(), isFlip: true);
         } else {
           Provider.of<WishListProvider>(context, listen: false).isWish ?
           Provider.of<WishListProvider>(context, listen: false).removeWishList(productId, feedbackMessage: feedbackMessage) :

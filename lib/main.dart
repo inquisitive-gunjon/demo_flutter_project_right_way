@@ -13,6 +13,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/home_category_product_provi
 import 'package:flutter_sixvalley_ecommerce/provider/location_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/wallet_transaction_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/dashboard/dashboard_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/order/order_details_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
@@ -52,27 +53,27 @@ Future<void> main() async {
   HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FlutterDownloader.initialize(debug: true , ignoreSsl: true);
+  // await FlutterDownloader.initialize(debug: true , ignoreSsl: true);
   await di.init();
-  final NotificationAppLaunchDetails notificationAppLaunchDetails =
-  await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  int _orderID;
-  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-    _orderID = (notificationAppLaunchDetails.payload != null && notificationAppLaunchDetails.payload.isNotEmpty)
-        ? int.parse(notificationAppLaunchDetails.payload) : null;
-  }
-  final RemoteMessage remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
-  if (remoteMessage != null) {
-    _orderID = remoteMessage.notification.titleLocKey != null ? int.parse(remoteMessage.notification.titleLocKey) : null;
-  }
-  print('========-notification-----$_orderID----===========');
+  // final NotificationAppLaunchDetails notificationAppLaunchDetails =
+  // await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  // int _orderID;
+  // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+  //   _orderID = (notificationAppLaunchDetails.payload != null && notificationAppLaunchDetails.payload.isNotEmpty)
+  //       ? int.parse(notificationAppLaunchDetails.payload) : null;
+  // }
+  // final RemoteMessage remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
+  // if (remoteMessage != null) {
+  //   _orderID = remoteMessage.notification.titleLocKey != null ? int.parse(remoteMessage.notification.titleLocKey) : null;
+  // }
+  //print('========-notification-----$_orderID----===========');
 
-  await MyNotification.initialize(flutterLocalNotificationsPlugin);
-  FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+  // await MyNotification.initialize(flutterLocalNotificationsPlugin);
+  // FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => di.sl<CategoryProvider>()),
+      // ChangeNotifierProvider(create: (context) => di.sl<CategoryProvider>()),
       ///ukrbd
       ChangeNotifierProvider(create: (context) => di.sl<CategoryProviderUkrbd>()),
 
@@ -105,13 +106,13 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<LocationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<WalletTransactionProvider>()),
     ],
-    child: MyApp(orderId: _orderID),
+    child: MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final int orderId;
-  MyApp({@required this.orderId});
+  //final int orderId;
+  //MyApp();
 
   static final navigatorKey = new GlobalKey<NavigatorState>();
 
@@ -135,8 +136,9 @@ class MyApp extends StatelessWidget {
         FallbackLocalizationDelegate()
       ],
       supportedLocales: _locals,
-      home: orderId == null ? SplashScreen() : OrderDetailsScreen(orderModel: null,
-        orderId: orderId, orderType: 'default_type',isNotification: true),
+      // home: orderId == null ? SplashScreen() : OrderDetailsScreen(orderModel: null,
+      //   orderId: orderId, orderType: 'default_type',isNotification: true),
+      home: SplashScreen(),
     );
   }
 }

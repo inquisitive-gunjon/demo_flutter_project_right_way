@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_widget.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_widget_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
@@ -38,7 +39,7 @@ class CategoryViewUkrbd extends StatelessWidget {
             return InkWell(
               onTap: () {
                 Provider.of<CategoryProviderUkrbd>(context, listen: false).changeSelectedIndex(index);
-                Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreenUkrbd()));
                 // Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
                 //   isBrand: false,
                 //   id: categoryProvider.categoryList[index].id.toString(),

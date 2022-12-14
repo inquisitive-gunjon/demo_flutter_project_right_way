@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/categories_ukrbd.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/category.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/category_ukrbd.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo.dart';
+import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/api_checker.dart';
 
 class CategoryProviderUkrbd extends ChangeNotifier {
-  final CategoryRepo categoryRepo;
+  final CategoryRepoUkrbd categoryRepo;
 
   CategoryProviderUkrbd({@required this.categoryRepo});
 

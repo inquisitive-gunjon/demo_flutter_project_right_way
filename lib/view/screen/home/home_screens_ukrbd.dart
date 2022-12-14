@@ -2,34 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_sixvalley_ecommerce/helper/product_type.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/featured_deal_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/flash_deal_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/home_category_product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_text_button.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_title_row.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_view_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/footer_banner.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/latest_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/mens_fashion_product_view.dart.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
 import 'package:provider/provider.dart';
@@ -44,9 +36,9 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
   final ScrollController _scrollController = ScrollController();
 
   Future<void> _loadData(BuildContext context, bool reload) async {
-    //await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
-    //Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
-    //Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
+    await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
+    Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
+    Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
     Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
     //Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
     //Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
@@ -196,7 +188,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           Dimensions.PADDING_SIZE_SMALL, Dimensions.PADDING_SIZE_DEFAULT, Dimensions.PADDING_SIZE_SMALL  ),
                       child: Column(
                         children: [
-                          BannersView(),
+                          BannersViewUkrbd(),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
@@ -209,7 +201,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: CategoryView(isHomePage: true),
+                            child: CategoryViewUkrbd(isHomePage: true),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
@@ -554,11 +546,11 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
                           // HomeCategoryProductView(isHomePage: true),
                           SizedBox(height: Dimensions.HOME_PAGE_PADDING),
 
-                          //footer banner
-                          Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
-                            return footerBannerProvider.footerBannerList != null && footerBannerProvider.footerBannerList.length>1?
-                            FooterBannersView(index: 1):SizedBox();
-                          }),
+                          // //footer banner
+                          // Consumer<BannerProvider>(builder: (context, footerBannerProvider, child){
+                          //   return footerBannerProvider.footerBannerList != null && footerBannerProvider.footerBannerList.length>1?
+                          //   FooterBannersView(index: 1):SizedBox();
+                          // }),
                           SizedBox(height: Dimensions.HOME_PAGE_PADDING),
 
 

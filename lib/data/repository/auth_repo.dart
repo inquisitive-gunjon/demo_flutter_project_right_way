@@ -154,7 +154,6 @@ class AuthRepo {
 
 
   //verify phone number
-
   Future<ApiResponse> checkPhone(String phone, String temporaryToken) async {
     try {
       Response response = await dioClient.post(

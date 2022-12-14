@@ -6,7 +6,7 @@ import 'package:flutter_sixvalley_ecommerce/data/repository/auth_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/banner_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/brand_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/cart_repo.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo.dart';
+import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/chat_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/coupon_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/featured_deal_repo.dart';
@@ -30,7 +30,6 @@ import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/coupon_provider.dart';
@@ -60,7 +59,6 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/datasource/remote/dio/logging_interceptor.dart';
-import 'data/repository/category_repo_ukrbd.dart';
 import 'data/repository/home_category_product_repo.dart';
 
 final sl = GetIt.instance;
@@ -74,7 +72,7 @@ Future<void> init() async {
 
 
   // Repository
-  sl.registerLazySingleton(() => CategoryRepo(dioClient: sl()));
+  //sl.registerLazySingleton(() => CategoryRepo(dioClient: sl()));
   ///ukrbd
   sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
   sl.registerLazySingleton(() => HomeCategoryProductRepo(dioClient: sl()));
@@ -102,7 +100,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => WalletTransactionRepo(dioClient: sl()));
 
   // Provider
-  sl.registerFactory(() => CategoryProvider(categoryRepo: sl()));
+  // sl.registerFactory(() => CategoryProvider(categoryRepo: sl()));
   ///ukrbd  CategoryProviderUkrbd
   sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
 

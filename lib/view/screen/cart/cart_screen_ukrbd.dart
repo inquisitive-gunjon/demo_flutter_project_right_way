@@ -1,7 +1,4 @@
 
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -17,9 +14,7 @@ class CartScreenUkrbd extends StatefulWidget {
 
 class _CartScreenUkrbdState extends State<CartScreenUkrbd> {
 
-
   int counter=0;
-
 
   @override
   Widget build(BuildContext context) {
