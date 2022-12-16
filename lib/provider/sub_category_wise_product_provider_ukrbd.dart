@@ -2,14 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/Data.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/category_wise_product.dart';
-import 'package:flutter_sixvalley_ecommerce/data/repository/category_wise_product_repo.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/produuct_model.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/sub_category_wise_product/sub_category_wise_product_model.dart';
+// import 'package:flutter_sixvalley_ecommerce/data/repository/category_wise_product_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/sub_category_wise_product_repo_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/api_checker_ukrbd.dart';
 
-import '../data/model/response/ukrbd/sub_category_wise_product/Data.dart';
-import '../data/model/response/ukrbd/sub_category_wise_product/SubCategoryWiseProductModel.dart';
 
 
 class SubCategoryWiseProductProviderUkrbd with ChangeNotifier{
@@ -18,14 +16,12 @@ class SubCategoryWiseProductProviderUkrbd with ChangeNotifier{
 
   SubCategoryWiseProductProviderUkrbd({@required this.subCategoryWiseProductRepoUkrbd});
 
-
-  //List<Categories> _categoryList = [];
   int _categorySelectedIndex;
   List<Data> _subCategoryWiseProductList=[];
   SubCategoryWiseProductModel _subCategoryWiseProduct;
-  SubCategoryWiseProductModel get categoryWiseProductResponse=>_subCategoryWiseProduct;
+  SubCategoryWiseProductModel get subCategoryWiseProduct=>_subCategoryWiseProduct;
 
-  List<Data> get categoryWiseProductList => _subCategoryWiseProductList;
+  List<Data> get subCategoryWiseProductList => _subCategoryWiseProductList;
   int get categorySelectedIndex => _categorySelectedIndex;
 
   Future<void> getSubCategoryWiseProductList(bool reload, BuildContext context,String categoryId) async {

@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
-// import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/Data.dart';
-// import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/Data.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/category_wise_product.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product_model/Data.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product_model/category_wise_product.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/produuct_model.dart';
+
 import 'package:flutter_sixvalley_ecommerce/data/repository/category_wise_product_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/api_checker_ukrbd.dart';
 

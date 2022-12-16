@@ -32,6 +32,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/cart_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/chat_provider.dart';
@@ -52,6 +53,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/search_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/sub_category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/support_ticket_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/theme_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
@@ -111,6 +113,8 @@ Future<void> init() async {
   ///ukrbd  CategoryProviderUkrbd
   sl.registerFactory(() => CategoryProviderUkrbd(categoryRepo: sl()));
   sl.registerFactory(() => CategoryWiseProductProviderUkrbd(categoryWiseProductRepoUkrbd: sl()));
+  sl.registerFactory(() => SubCategoryWiseProductProviderUkrbd(subCategoryWiseProductRepoUkrbd: sl()));
+  sl.registerFactory(() => CartProviderUkrbd(sharedPreferences: sl()));
 
   sl.registerFactory(() => HomeCategoryProductProvider(homeCategoryProductRepo: sl()));
   sl.registerFactory(() => TopSellerProvider(topSellerRepo: sl()));

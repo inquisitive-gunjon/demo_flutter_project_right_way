@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/cart_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/facebook_login_provider.dart';
@@ -80,6 +81,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<CategoryProviderUkrbd>()),
       ChangeNotifierProvider(create: (context) => di.sl<CategoryWiseProductProviderUkrbd>()),
       ChangeNotifierProvider(create: (context) => di.sl<SubCategoryWiseProductProviderUkrbd>()),
+      ChangeNotifierProvider(create: (context) => di.sl<CartProviderUkrbd>()),
 
       ///
       ChangeNotifierProvider(create: (context) => di.sl<HomeCategoryProductProvider>()),

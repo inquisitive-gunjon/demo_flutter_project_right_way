@@ -21,175 +21,233 @@ class BrandAndCategoryProductScreenUkrbd extends StatefulWidget {
   final String name;
   final String image;
   // final List<Data> productsList;
-  BrandAndCategoryProductScreenUkrbd({@required this.isBrand, @required this.id, @required this.name, this.image,this.isSubcategory});
+  BrandAndCategoryProductScreenUkrbd(
+      {@required this.isBrand,
+      @required this.id,
+      @required this.name,
+      this.image,
+      this.isSubcategory});
 
   @override
-  State<BrandAndCategoryProductScreenUkrbd> createState() => _BrandAndCategoryProductScreenUkrbdState();
+  State<BrandAndCategoryProductScreenUkrbd> createState() =>
+      _BrandAndCategoryProductScreenUkrbdState();
 }
 
-class _BrandAndCategoryProductScreenUkrbdState extends State<BrandAndCategoryProductScreenUkrbd> {
+class _BrandAndCategoryProductScreenUkrbdState
+    extends State<BrandAndCategoryProductScreenUkrbd> {
 
 
-
-
-  _load(BuildContext context, bool reload)async{
+  _load(BuildContext context, bool reload) async {
     print(widget.id);
-    !widget.isSubcategory?await Provider.of<SubCategoryWiseProductProviderUkrbd>(context, listen: false).getSubCategoryWiseProductList(reload, context, widget.id):await Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductList(reload, context,widget.id);
-
+    widget.isSubcategory
+        ? await Provider.of<SubCategoryWiseProductProviderUkrbd>(context,
+                listen: false)
+            .getSubCategoryWiseProductList(reload, context, widget.id)
+        : await Provider.of<CategoryWiseProductProviderUkrbd>(context,
+                listen: false)
+            .getCategoryWiseProductList(reload, context, widget.id);
   }
-//CategoryWiseProductProviderUkrbd
 
+
+//CategoryWiseProductProviderUkrbd
 
   @override
   Widget build(BuildContext context) {
-    _load(context,true);
+    _load(context, true);
     //Provider.of<ProductProvider>(context, listen: false).initBrandOrCategoryProductList(isBrand, id, context);
-    return !widget.isSubcategory?WillPopScope(
-      onWillPop: (){
-        Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).clear();
-        Navigator.of(context).pop();
-      },
-      child: Scaffold(
-        backgroundColor: ColorResources.getIconBg(context),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+    return !widget.isSubcategory
+        ? WillPopScope(
+            onWillPop: () {
+              Provider.of<CategoryWiseProductProviderUkrbd>(context,
+                      listen: false)
+                  .clear();
+              Navigator.of(context).pop();
+            },
+            child: Scaffold(
+              backgroundColor: ColorResources.getIconBg(context),
+              body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // CustomAppBar(title: widget.name,onBackPressed: (){
+                    //
+                    // },),
+                    Consumer<CategoryWiseProductProviderUkrbd>(builder:
+                        (context, categoryWiseProductProviderUkrbd, child) {
+                      return CustomAppBar(
+                        title: widget.name,
+                        onBackPressed: () {
+                          categoryWiseProductProviderUkrbd.clear();
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    }),
 
-         // CustomAppBar(title: widget.name,onBackPressed: (){
-         //
-         // },),
-      Consumer<CategoryWiseProductProviderUkrbd>(
-      builder: (context,categoryWiseProductProviderUkrbd,child){
-          return CustomAppBar(title: widget.name,onBackPressed: (){
-            categoryWiseProductProviderUkrbd.clear();
-            Navigator.of(context).pop();
-          },);}),
+                    // widget.isBrand ? Container(height: 100,
+                    //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
+                    //   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                    //   color: Theme.of(context).highlightColor,
+                    //   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    //     FadeInImage.assetNetwork(
+                    //       placeholder: Images.placeholder, width: 80, height: 80, fit: BoxFit.cover,
+                    //       image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.brandImageUrl}/${widget.image}',
+                    //       imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, width: 80, height: 80, fit: BoxFit.cover),
+                    //     ),
+                    //     SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                    //
+                    //
+                    //     Text(widget.name, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+                    //   ]),
+                    // ) : SizedBox.shrink(),
 
+                    SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
+                    // Products
+                    // productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
+                    Consumer<CategoryWiseProductProviderUkrbd>(builder:
+                        (context, categoryWiseProductProviderUkrbd, child) {
+                      print(
+                          "product list :::::::::::::::${categoryWiseProductProviderUkrbd.categoryWiseProductList.length}");
+                      return categoryWiseProductProviderUkrbd
+                                  .categoryWiseProductList.length >
+                              0
+                          ? Expanded(
+                              child: StaggeredGridView.countBuilder(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Dimensions.PADDING_SIZE_SMALL),
+                                physics: BouncingScrollPhysics(),
+                                crossAxisCount: 2,
+                                itemCount: categoryWiseProductProviderUkrbd
+                                    .categoryWiseProductList.length,
+                                shrinkWrap: true,
+                                staggeredTileBuilder: (int index) =>
+                                    StaggeredTile.fit(1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  print("print product");
+                                  return ProductWidgetUkrbd(
+                                      productModel:
+                                          categoryWiseProductProviderUkrbd
+                                              .categoryWiseProductList[index]);
+                                  // return null;
+                                },
+                              ),
+                            )
+                          :
 
-          // widget.isBrand ? Container(height: 100,
-          //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
-          //   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-          //   color: Theme.of(context).highlightColor,
-          //   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          //     FadeInImage.assetNetwork(
-          //       placeholder: Images.placeholder, width: 80, height: 80, fit: BoxFit.cover,
-          //       image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.brandImageUrl}/${widget.image}',
-          //       imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, width: 80, height: 80, fit: BoxFit.cover),
-          //     ),
-          //     SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-          //
-          //
-          //     Text(widget.name, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
-          //   ]),
-          // ) : SizedBox.shrink(),
+                          // Expanded(child: Center(child: productProvider.hasData ?
+                          Expanded(
+                              child: Center(
+                              child: categoryWiseProductProviderUkrbd
+                                          .categoryWiseProductList.length ==
+                                      0
+                                  ? ProductShimmer(
+                                      isHomePage: false,
+                                      isEnabled:
+                                          Provider.of<ProductProvider>(context)
+                                                  .brandOrCategoryProductList
+                                                  .length ==
+                                              0)
+                                  : NoInternetOrDataScreen(isNoInternet: false),
+                            ));
+                    }),
+                  ]),
+            ),
+          )
+        : WillPopScope(
+            onWillPop: () {
+              Provider.of<SubCategoryWiseProductProviderUkrbd>(context,
+                      listen: false)
+                  .clear();
+              Navigator.of(context).pop();
+            },
+            child: Scaffold(
+              backgroundColor: ColorResources.getIconBg(context),
+              body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // CustomAppBar(title: widget.name,onBackPressed: (){
+                    //
+                    // },),
+                    Consumer<SubCategoryWiseProductProviderUkrbd>(builder:
+                        (context, subCategoryWiseProductProviderUkrbd, child) {
+                      return CustomAppBar(
+                        title: widget.name,
+                        onBackPressed: () {
+                          subCategoryWiseProductProviderUkrbd.clear();
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    }),
 
-          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                    // widget.isBrand ? Container(height: 100,
+                    //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
+                    //   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
+                    //   color: Theme.of(context).highlightColor,
+                    //   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    //     FadeInImage.assetNetwork(
+                    //       placeholder: Images.placeholder, width: 80, height: 80, fit: BoxFit.cover,
+                    //       image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.brandImageUrl}/${widget.image}',
+                    //       imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, width: 80, height: 80, fit: BoxFit.cover),
+                    //     ),
+                    //     SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                    //
+                    //
+                    //     Text(widget.name, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
+                    //   ]),
+                    // ) : SizedBox.shrink(),
 
-          // Products
-          // productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
-          Consumer<CategoryWiseProductProviderUkrbd>(
-              builder: (context,categoryWiseProductProviderUkrbd,child){
-                print("product list :::::::::::::::${categoryWiseProductProviderUkrbd.categoryWiseProductList.length}");
-            return categoryWiseProductProviderUkrbd.categoryWiseProductList.length > 0 ? Expanded(
-              child: StaggeredGridView.countBuilder(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-                physics: BouncingScrollPhysics(),
-                crossAxisCount: 2,
-                itemCount: categoryWiseProductProviderUkrbd.categoryWiseProductList.length,
-                shrinkWrap: true,
-                staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-                itemBuilder: (BuildContext context, int index) {
-                  print("print product");
-                  return ProductWidgetUkrbd(productModel: categoryWiseProductProviderUkrbd.categoryWiseProductList[index]);
-                  // return null;
-                  },
-              ),
-            ) :
+                    SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
-            // Expanded(child: Center(child: productProvider.hasData ?
-            Expanded(child: Center(child: categoryWiseProductProviderUkrbd.categoryWiseProductList.length==0?
+                    // Products
+                    // productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
+                    Consumer<SubCategoryWiseProductProviderUkrbd>(builder:
+                        (context, subCategoryWiseProductProviderUkrbd, child) {
+                      print(
+                          "product list :::::::::::::::${subCategoryWiseProductProviderUkrbd.subCategoryWiseProductList.length}");
+                      return subCategoryWiseProductProviderUkrbd
+                                  .subCategoryWiseProductList.length >
+                              0
+                          ? Expanded(
+                              child: StaggeredGridView.countBuilder(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Dimensions.PADDING_SIZE_SMALL),
+                                physics: BouncingScrollPhysics(),
+                                crossAxisCount: 2,
+                                itemCount: subCategoryWiseProductProviderUkrbd
+                                    .subCategoryWiseProductList.length,
+                                shrinkWrap: true,
+                                staggeredTileBuilder: (int index) =>
+                                    StaggeredTile.fit(1),
+                                itemBuilder: (BuildContext context, int index) {
+                                  print("print product");
+                                  return ProductWidgetUkrbd(
+                                      productModel:
+                                          subCategoryWiseProductProviderUkrbd
+                                                  .subCategoryWiseProductList[
+                                              index]);
+                                  // return null;
+                                },
+                              ),
+                            )
+                          :
 
-            ProductShimmer(isHomePage: false,
-                isEnabled: Provider.of<ProductProvider>(context).brandOrCategoryProductList.length == 0)
-                : NoInternetOrDataScreen(isNoInternet: false),
-            ));
-              }
-          ),
-
-        ]),
-      ),
-    ):WillPopScope(
-    onWillPop: (){
-    Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).clear();
-    Navigator.of(context).pop();
-    },
-    child: Scaffold(
-    backgroundColor: ColorResources.getIconBg(context),
-    body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-
-    // CustomAppBar(title: widget.name,onBackPressed: (){
-    //
-    // },),
-    Consumer<CategoryWiseProductProviderUkrbd>(
-    builder: (context,categoryWiseProductProviderUkrbd,child){
-    return CustomAppBar(title: widget.name,onBackPressed: (){
-    categoryWiseProductProviderUkrbd.clear();
-    Navigator.of(context).pop();
-    },);}),
-
-
-
-    // widget.isBrand ? Container(height: 100,
-    //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
-    //   margin: EdgeInsets.only(top: Dimensions.PADDING_SIZE_SMALL),
-    //   color: Theme.of(context).highlightColor,
-    //   child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-    //     FadeInImage.assetNetwork(
-    //       placeholder: Images.placeholder, width: 80, height: 80, fit: BoxFit.cover,
-    //       image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.brandImageUrl}/${widget.image}',
-    //       imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, width: 80, height: 80, fit: BoxFit.cover),
-    //     ),
-    //     SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-    //
-    //
-    //     Text(widget.name, style: titilliumSemiBold.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),
-    //   ]),
-    // ) : SizedBox.shrink(),
-
-    SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
-    // Products
-    // productProvider.brandOrCategoryProductList.length > 0 ? Expanded(
-    Consumer<CategoryWiseProductProviderUkrbd>(
-    builder: (context,categoryWiseProductProviderUkrbd,child){
-    print("product list :::::::::::::::${categoryWiseProductProviderUkrbd.categoryWiseProductList.length}");
-    return categoryWiseProductProviderUkrbd.categoryWiseProductList.length > 0 ? Expanded(
-    child: StaggeredGridView.countBuilder(
-    padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-    physics: BouncingScrollPhysics(),
-    crossAxisCount: 2,
-    itemCount: categoryWiseProductProviderUkrbd.categoryWiseProductList.length,
-    shrinkWrap: true,
-    staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-    itemBuilder: (BuildContext context, int index) {
-    print("print product");
-    return ProductWidgetUkrbd(productModel: categoryWiseProductProviderUkrbd.categoryWiseProductList[index]);
-    // return null;
-    },
-    ),
-    ) :
-
-    // Expanded(child: Center(child: productProvider.hasData ?
-    Expanded(child: Center(child: categoryWiseProductProviderUkrbd.categoryWiseProductList.length==0?
-
-    ProductShimmer(isHomePage: false,
-    isEnabled: Provider.of<ProductProvider>(context).brandOrCategoryProductList.length == 0)
-        : NoInternetOrDataScreen(isNoInternet: false),
-    ));
-    }
-    ),
-
-    ]),
-    ),
-    );
+                          // Expanded(child: Center(child: productProvider.hasData ?
+                          Expanded(
+                              child: Center(
+                              child: subCategoryWiseProductProviderUkrbd
+                                          .subCategoryWiseProductList.length ==
+                                      0
+                                  ? ProductShimmer(
+                                      isHomePage: false,
+                                      isEnabled:
+                                          Provider.of<ProductProvider>(context)
+                                                  .brandOrCategoryProductList
+                                                  .length ==
+                                              0)
+                                  : NoInternetOrDataScreen(isNoInternet: false),
+                            ));
+                    }),
+                  ]),
+            ),
+          );
   }
 }

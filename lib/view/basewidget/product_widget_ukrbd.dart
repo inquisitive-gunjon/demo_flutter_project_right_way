@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/category_wise_product/Data.dart';
-import 'package:flutter_sixvalley_ecommerce/data/model/ukrbd_response/Products.dart';
-import 'package:flutter_sixvalley_ecommerce/helper/price_converter.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/produuct_model.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/rating_bar.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/product/product_details_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/ProductDetailsScreenUkrbd.dart';
 
 class ProductWidgetUkrbd extends StatelessWidget {
   final Data productModel;
@@ -23,10 +18,10 @@ class ProductWidgetUkrbd extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // Navigator.push(context, PageRouteBuilder(
-        //   transitionDuration: Duration(milliseconds: 1000),
-        //   pageBuilder: (context, anim1, anim2) => ProductDetails(productId: productModel.id,slug: productModel.productName),
-        // ));
+        Navigator.push(context, PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000),
+          pageBuilder: (context, anim1, anim2) => ProductDetailsScreenUkrbd(productModel: productModel,),
+        ));
       },
       child: Container(
         height: MediaQuery.of(context).size.width/1.5,

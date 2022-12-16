@@ -93,6 +93,7 @@ class AllCategoryScreenUkrbd extends StatelessWidget {
                               isBrand: false,
                               id: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].id.toString(),
                               name: categoryProvider.categoryList[categoryProvider.categorySelectedIndex].category,
+                              isSubcategory: false,
                             )));
                           },
                         ),
@@ -142,6 +143,7 @@ class AllCategoryScreenUkrbd extends StatelessWidget {
                               isBrand: false,
                               id: _subCategory.id.toString(),
                               name: _subCategory.subCategory,
+                              isSubcategory: true,
                             )));
                           },
                         ),
