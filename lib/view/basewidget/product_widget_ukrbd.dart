@@ -15,6 +15,10 @@ class ProductWidgetUkrbd extends StatelessWidget {
   Widget build(BuildContext context) {
     // String ratting = productModel.rating != null && productModel.rating.length != 0? productModel.rating[0].average : "0";
     String ratting =  "5";
+    final size= MediaQuery.of(context).size;
+    final double offers =productModel.discount.isNotEmpty?int.tryParse(productModel.discount)/int.tryParse(productModel.salesPrice)*100:0.0;
+    final int befor_discount=productModel.discount.isNotEmpty?int.tryParse(productModel.salesPrice)-int.tryParse(productModel.discount):int.tryParse(productModel.salesPrice);
+
 
     return InkWell(
       onTap: () {
@@ -89,19 +93,7 @@ class ProductWidgetUkrbd extends StatelessWidget {
                                   fontSize: Dimensions.FONT_SIZE_SMALL,
                                 )),
                           ]),
-                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
 
-
-                      // productModel.discount!= null && int.tryParse(productModel.discount) > 0 ?
-                      // Text(PriceConverter.convertPrice(context, int.tryParse(productModel.price).toDouble()),
-                      //   style: titleRegular.copyWith(
-                      //     color: ColorResources.getRed(context),
-                      //     decoration: TextDecoration.lineThrough,
-                      //
-                      //     fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                      //   ),
-                      // ) : SizedBox.shrink(),
-                      SizedBox(height: 2,),
 
 
                       // Text(PriceConverter.convertPrice(context,
@@ -111,9 +103,28 @@ class ProductWidgetUkrbd extends StatelessWidget {
                       //   style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context)),
                       // ),
 
-                  Text("${productModel.price}",
-                      style: titilliumSemiBold.copyWith(color: ColorResources.getPrimary(context)),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "৳${productModel.salesPrice??0.0}",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width*(15/360),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ৳${befor_discount}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.red,
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: MediaQuery.of(context).size.width*(10/360),
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
 
 
 
@@ -146,7 +157,8 @@ class ProductWidgetUkrbd extends StatelessWidget {
             //   ),
             // ),
               child: Center(
-                child: Text((productModel.discount),
+                child: Text(
+                          "${offers.toStringAsFixed(2)}% off",
                   style: robotoRegular.copyWith(color: Theme.of(context).highlightColor,
                       fontSize: Dimensions.FONT_SIZE_SMALL),
                 ),

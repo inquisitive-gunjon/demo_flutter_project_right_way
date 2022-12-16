@@ -4,6 +4,7 @@ import 'package:flutter_sixvalley_ecommerce/helper/product_type.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/flash_deal_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
@@ -14,6 +15,9 @@ import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_text_button.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_title_row.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_shimmer.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_widget.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_widget_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/category/all_category_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/announcement.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/banners_view.dart';
@@ -22,8 +26,10 @@ import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/category_vie
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/footer_banner.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/latest_product_view.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/home/widget/mens_fashion_product_view.dart.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/view_all_product_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/search/search_screen.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
 
@@ -40,6 +46,7 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
     Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
     Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
     Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
+    Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductList(reload, context, "76");
     //Provider.of<HomeCategoryProductProvider>(context, listen: false).getHomeCategoryProductList(reload, context);
     //Provider.of<TopSellerProvider>(context, listen: false).getTopSellerList(reload, context);
     //Provider.of<BrandProvider>(context, listen: false).getBrandList(reload, context);
@@ -283,29 +290,64 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
 
 
                           // Featured Products
-                          Consumer<ProductProvider>(
-                              builder: (context, featured,_) {
-                                return featured.featuredProductList!=null && featured.featuredProductList.length>0 ?
+                          Consumer<CategoryWiseProductProviderUkrbd>(
+                              builder: (context, categoryWiseProductProviderUkrbd,_) {
+                                return categoryWiseProductProviderUkrbd.categoryWiseProductList.length>0 ?
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
                                     child: CustomTitleRow(title: getTranslated("mens_fashion", context),
-                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => AllProductScreenUkrbd(productType: ProductType.MENS_FASHION_PRODUCT)));}),
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
+                                            isBrand: false,
+                                            id: categoryWiseProductProviderUkrbd.categoryWiseProductList[0].id.toString(),
+                                            name: categoryWiseProductProviderUkrbd.categoryWiseProductList[0].category.toString(),
+                                            isSubcategory: false,
+                                          )));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(id: "76",isBrand: false,isSubcategory: false,name: categoryWiseProductProviderUkrbd.categoryWiseProductList[0].category,)));
+                                    }),
                                   ),
                                 ):SizedBox();
                               }
                           ),
 
-                          // Padding(
-                          //   padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                          //   child: FeaturedProductView(scrollController: _scrollController, isHome: true,),
-                          // ),
-
                           Padding(
                             padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
-                            child: MensFashionProductView(scrollController: _scrollController, isHome: true,),
+                            child: Consumer<CategoryWiseProductProviderUkrbd>(
+                              builder: (context,categoryWiseProductProviderUkrbd,child){
+                                return Column(
+                                  //controller: _scrollController,
+                                    children: [
+
+                                      categoryWiseProductProviderUkrbd.categoryWiseProductList.length != 0 ?
+                                      StaggeredGridView.countBuilder(
+                                        itemCount: categoryWiseProductProviderUkrbd.categoryWiseProductList.length>4?
+                                        4:categoryWiseProductProviderUkrbd.categoryWiseProductList.length,
+                                        crossAxisCount: 2,
+                                        padding: EdgeInsets.all(0),
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                                        itemBuilder: (BuildContext context, int index) {
+                                          return ProductWidgetUkrbd(productModel: categoryWiseProductProviderUkrbd.categoryWiseProductList[index]);
+                                        },
+                                      ) : ProductShimmer(isHomePage: true ,isEnabled: true),
+
+                                      // prodProvider.filterIsLoading ? Center(child: Padding(
+                                      //   padding: EdgeInsets.all(Dimensions.ICON_SIZE_EXTRA_SMALL),
+                                      //   child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor)),
+                                      // )) : SizedBox.shrink(),
+
+                                    ]);
+                              },
+                            ),
                           ),
+
+                          // Padding(
+                          //   padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
+                          //   child: MensFashionProductView(scrollController: _scrollController, isHome: true,),
+                          // ),
 
 
 
