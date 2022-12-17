@@ -141,4 +141,5 @@ class OnBoardingScreen extends StatelessWidget {
     }
     return _indicators;
   }
+
 }

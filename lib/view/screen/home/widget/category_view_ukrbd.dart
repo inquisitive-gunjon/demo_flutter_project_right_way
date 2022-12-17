@@ -43,13 +43,10 @@ class _CategoryViewUkrbdState extends State<CategoryViewUkrbd> {
 
             return InkWell(
               onTap: () {
+
                 Provider.of<CategoryProviderUkrbd>(context, listen: false).changeSelectedIndex(index);
                 Navigator.push(context, MaterialPageRoute(builder: (_) => AllCategoryScreenUkrbd()));
-                // Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreen(
-                //   isBrand: false,
-                //   id: categoryProvider.categoryList[index].id.toString(),
-                //   name: categoryProvider.categoryList[index].category,
-                // )));
+
               },
               child: CategoryWidgetUkrbd(category: categoryProvider.categoryList[index]),
             );

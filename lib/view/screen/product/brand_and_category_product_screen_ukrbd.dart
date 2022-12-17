@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/ukrbd/produuct_model.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/sub_category_wise_product_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
-import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/no_internet_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/product_shimmer.dart';
@@ -16,17 +14,21 @@ import 'package:provider/provider.dart';
 
 class BrandAndCategoryProductScreenUkrbd extends StatefulWidget {
   final bool isBrand;
+  final bool isHome;
   final bool isSubcategory;
   final String id;
   final String name;
   final String image;
-  // final List<Data> productsList;
+  final List<Data> productsList;
   BrandAndCategoryProductScreenUkrbd(
       {@required this.isBrand,
       @required this.id,
       @required this.name,
+        @required this.isHome,
+        this.productsList,
       this.image,
-      this.isSubcategory});
+      this.isSubcategory}
+      );
 
   @override
   State<BrandAndCategoryProductScreenUkrbd> createState() =>
@@ -40,12 +42,8 @@ class _BrandAndCategoryProductScreenUkrbdState
   _load(BuildContext context, bool reload) async {
     print(widget.id);
     widget.isSubcategory
-        ? await Provider.of<SubCategoryWiseProductProviderUkrbd>(context,
-                listen: false)
-            .getSubCategoryWiseProductList(reload, context, widget.id)
-        : await Provider.of<CategoryWiseProductProviderUkrbd>(context,
-                listen: false)
-            .getCategoryWiseProductList(reload, context, widget.id);
+        ? await Provider.of<SubCategoryWiseProductProviderUkrbd>(context, listen: false).getSubCategoryWiseProductList(reload, context, widget.id)
+        : await Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductList(reload, context, widget.id);
   }
 
 
@@ -58,26 +56,32 @@ class _BrandAndCategoryProductScreenUkrbdState
     return !widget.isSubcategory
         ? WillPopScope(
             onWillPop: () {
-              Provider.of<CategoryWiseProductProviderUkrbd>(context,
-                      listen: false)
-                  .clear();
-              Navigator.of(context).pop();
+              if(!widget.isHome){
+                Provider.of<CategoryWiseProductProviderUkrbd>(context,
+                    listen: false)
+                    .clear();
+                Navigator.of(context).pop();
+              }else{
+                Navigator.of(context).pop();
+              }
             },
             child: Scaffold(
               backgroundColor: ColorResources.getIconBg(context),
               body: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // CustomAppBar(title: widget.name,onBackPressed: (){
-                    //
-                    // },),
+
                     Consumer<CategoryWiseProductProviderUkrbd>(builder:
                         (context, categoryWiseProductProviderUkrbd, child) {
                       return CustomAppBar(
                         title: widget.name,
                         onBackPressed: () {
-                          categoryWiseProductProviderUkrbd.clear();
-                          Navigator.of(context).pop();
+                          if(!widget.isHome){
+                            categoryWiseProductProviderUkrbd.clear();
+                            Navigator.of(context).pop();
+                          }else{
+                            Navigator.of(context).pop();
+                          }
                         },
                       );
                     }),
@@ -106,27 +110,24 @@ class _BrandAndCategoryProductScreenUkrbdState
                     Consumer<CategoryWiseProductProviderUkrbd>(builder:
                         (context, categoryWiseProductProviderUkrbd, child) {
                       print(
-                          "product list :::::::::::::::${categoryWiseProductProviderUkrbd.categoryWiseProductList.length}");
-                      return categoryWiseProductProviderUkrbd
-                                  .categoryWiseProductList.length >
-                              0
+                          "product list :::::::::::::::");
+
+                      List<Data> categoryWiseProductsList=widget.isHome?widget.productsList:categoryWiseProductProviderUkrbd.categoryWiseProductList;
+                      return categoryWiseProductsList.length > 0
                           ? Expanded(
                               child: StaggeredGridView.countBuilder(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: Dimensions.PADDING_SIZE_SMALL),
                                 physics: BouncingScrollPhysics(),
                                 crossAxisCount: 2,
-                                itemCount: categoryWiseProductProviderUkrbd
-                                    .categoryWiseProductList.length,
+                                itemCount: categoryWiseProductsList.length,
                                 shrinkWrap: true,
                                 staggeredTileBuilder: (int index) =>
                                     StaggeredTile.fit(1),
                                 itemBuilder: (BuildContext context, int index) {
                                   print("print product");
                                   return ProductWidgetUkrbd(
-                                      productModel:
-                                          categoryWiseProductProviderUkrbd
-                                              .categoryWiseProductList[index]);
+                                      productModel: categoryWiseProductsList[index]);
                                   // return null;
                                 },
                               ),
@@ -136,28 +137,25 @@ class _BrandAndCategoryProductScreenUkrbdState
                           // Expanded(child: Center(child: productProvider.hasData ?
                           Expanded(
                               child: Center(
-                              child: categoryWiseProductProviderUkrbd
-                                          .categoryWiseProductList.length ==
-                                      0
-                                  ? ProductShimmer(
-                                      isHomePage: false,
-                                      isEnabled:
-                                          Provider.of<ProductProvider>(context)
-                                                  .brandOrCategoryProductList
-                                                  .length ==
-                                              0)
+                              child: categoryWiseProductsList.length == 0
+                                  ? ProductShimmer(isHomePage: false, isEnabled: categoryWiseProductsList.length == 0)
                                   : NoInternetOrDataScreen(isNoInternet: false),
-                            ));
+                            )
+                          );
                     }),
                   ]),
             ),
           )
         : WillPopScope(
             onWillPop: () {
-              Provider.of<SubCategoryWiseProductProviderUkrbd>(context,
-                      listen: false)
-                  .clear();
-              Navigator.of(context).pop();
+              if(!widget.isHome){
+                Provider.of<SubCategoryWiseProductProviderUkrbd>(context,
+                    listen: false)
+                    .clear();
+                Navigator.of(context).pop();
+              }else{
+                Navigator.of(context).pop();
+              }
             },
             child: Scaffold(
               backgroundColor: ColorResources.getIconBg(context),
@@ -172,8 +170,12 @@ class _BrandAndCategoryProductScreenUkrbdState
                       return CustomAppBar(
                         title: widget.name,
                         onBackPressed: () {
-                          subCategoryWiseProductProviderUkrbd.clear();
-                          Navigator.of(context).pop();
+                          if(!widget.isHome){
+                            subCategoryWiseProductProviderUkrbd.clear();
+                            Navigator.of(context).pop();
+                          }else{
+                            Navigator.of(context).pop();
+                          }
                         },
                       );
                     }),
