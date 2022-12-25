@@ -4,6 +4,7 @@ import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_clien
 import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/ukrbd_dio_client.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/auth_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/banner_repo.dart';
+import 'package:flutter_sixvalley_ecommerce/data/repository/banner_repo_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/brand_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/cart_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/data/repository/category_repo_ukrbd.dart';
@@ -30,6 +31,7 @@ import 'package:flutter_sixvalley_ecommerce/data/repository/wishlist_repo.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/banner_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider_ukrbd.dart';
@@ -82,6 +84,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CategoryRepoUkrbd(dioClient: sl()));
   sl.registerLazySingleton(() => CategoryWiseProductRepoUkrbd(dioClient: sl()));
   sl.registerLazySingleton(() => SubCategoryWiseProductRepoUkrbd(dioClient: sl()));
+  sl.registerLazySingleton(() => BannerRepoUkrbd(dioClient: sl()));
 
 
   sl.registerLazySingleton(() => HomeCategoryProductRepo(dioClient: sl()));
@@ -115,6 +118,7 @@ Future<void> init() async {
   sl.registerFactory(() => CategoryWiseProductProviderUkrbd(categoryWiseProductRepoUkrbd: sl()));
   sl.registerFactory(() => SubCategoryWiseProductProviderUkrbd(subCategoryWiseProductRepoUkrbd: sl()));
   sl.registerFactory(() => CartProviderUkrbd(sharedPreferences: sl()));
+  sl.registerFactory(() => BannerProviderUkrbd(bannerRepoUkrbd: sl()));
 
   sl.registerFactory(() => HomeCategoryProductProvider(homeCategoryProductRepo: sl()));
   sl.registerFactory(() => TopSellerProvider(topSellerRepo: sl()));

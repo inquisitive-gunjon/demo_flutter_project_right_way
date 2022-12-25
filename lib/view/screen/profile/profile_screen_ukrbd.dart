@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/not_loggedin_widget_ukrbd.dart';
 
 
 class ProfileScreenUkrbd extends StatefulWidget {
@@ -15,6 +16,8 @@ class ProfileScreenUkrbd extends StatefulWidget {
 class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTickerProviderStateMixin{
 
   TabController _tabController;
+
+  bool isLogedIn=false;
 
   @override
   void initState() {
@@ -34,7 +37,7 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
+      body: isLogedIn?Stack(
         children: [
 
           Align(
@@ -223,7 +226,7 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
             clipper: MyClipper(),
           ),
         ],
-      ),
+      ):NotLoggedInWidgetUkrbd(),
     );
   }
 }

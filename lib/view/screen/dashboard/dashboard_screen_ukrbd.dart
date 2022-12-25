@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/network_info.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/auth/auth_screen_ukrbd.dart';
 
 import 'package:flutter_sixvalley_ecommerce/view/screen/cart/cart_screen_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
@@ -21,11 +22,11 @@ class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
   int _pageIndex = 0;
   List<Widget> _screens ;
   GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
-  bool singleVendor = false;
+  // bool singleVendor = false;
   @override
   void initState() {
     super.initState();
-    singleVendor = Provider.of<SplashProvider>(context, listen: false).configModel.businessMode == "single";
+    // singleVendor = Provider.of<SplashProvider>(context, listen: false).configModel.businessMode == "single";
 
     // _screens = [
     //   HomePageUkrbd(),
@@ -39,6 +40,7 @@ class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
       HomePageUkrbd(),
       // OrderScreen(isBacButtonExist: false),
       OrderScreenUkrbd(),
+      // AuthScreenUkrbd(),
       ProfileScreenUkrbd(),
       CartScreenUkrbd(),
     ];
@@ -73,7 +75,7 @@ class _DashBoardScreenUkrbdState extends State<DashBoardScreenUkrbd> {
             showUnselectedLabels: true,
             currentIndex: _pageIndex,
             type: BottomNavigationBarType.fixed,
-            items: _getBottomWidget(singleVendor),
+            items: _getBottomWidget(true),
             onTap: (int index) {
               print("index index index :-------------- ${index}");
               _setPage(index);

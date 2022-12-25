@@ -5,6 +5,7 @@ import 'package:flutter_sixvalley_ecommerce/provider/cart_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
+import 'package:flutter_sixvalley_ecommerce/view/screen/checkout/checkout_screen_ukrbd.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -559,6 +560,8 @@ class _CartScreenUkrbdState extends State<CartScreenUkrbd> {
                   ),
                   GestureDetector(
                     onTap: (){
+
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> CheckoutUkrbd()));
 
                     },
                     child: Container(

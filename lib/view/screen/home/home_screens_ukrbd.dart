@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/product_type.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/banner_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/flash_deal_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/product_provider.dart';
@@ -33,15 +34,15 @@ class HomePageUkrbd extends StatefulWidget {
 class _HomePageUkrbdState extends State<HomePageUkrbd> {
   final ScrollController _scrollController = ScrollController();
 
-  Future<void> _loadData(BuildContext context, bool reload) async {
-    await Provider.of<BannerProvider>(context, listen: false).getBannerList(reload, context);
-    Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
-    Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
+  Future<void> _loadData(BuildContext context, bool reload){
+    Provider.of<BannerProviderUkrbd>(context, listen: false).getBannerList(reload, context);
+    // Provider.of<BannerProvider>(context, listen: false).getFooterBannerList(context);
+    // Provider.of<BannerProvider>(context, listen: false).getMainSectionBanner(context);
     Provider.of<CategoryProviderUkrbd>(context, listen: false).getCategoryList(reload, context);
-    Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: reload);
-    Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, reload: reload);
-    Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, reload: reload);
-    Provider.of<ProductProvider>(context, listen: false).getRecommendedProduct(context);
+    // Provider.of<ProductProvider>(context, listen: false).getLatestProductList(1, context, reload: reload);
+    // Provider.of<ProductProvider>(context, listen: false).getFeaturedProductList('1', context, reload: reload);
+    // Provider.of<ProductProvider>(context, listen: false).getLProductList('1', context, reload: reload);
+    // Provider.of<ProductProvider>(context, listen: false).getRecommendedProduct(context);
   }
 
   void passData(int index, String title) {
@@ -54,10 +55,10 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
   void initState() {
     super.initState();
 
-    singleVendor = Provider.of<SplashProvider>(context, listen: false).configModel.businessMode == "single";
-    Provider.of<FlashDealProvider>(context, listen: false).getMegaDealList(true, context, true);
+    // singleVendor = Provider.of<SplashProvider>(context, listen: false).configModel.businessMode == "single";
+    // Provider.of<FlashDealProvider>(context, listen: false).getMegaDealList(true, context, true);
 
-    _loadData(context, false);
+    _loadData(context, true);
 
     // if(Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
     //   Provider.of<CartProvider>(context, listen: false).uploadToServer(context);
@@ -90,44 +91,6 @@ class _HomePageUkrbdState extends State<HomePageUkrbd> {
               CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  // App Bar
-                  // SliverAppBar(
-                  //   floating: true,
-                  //   elevation: 0,
-                  //   centerTitle: false,
-                  //   automaticallyImplyLeading: false,
-                  //   backgroundColor: Theme.of(context).highlightColor,
-                  //   title: Image.asset(Images.logo_with_name_image, height: 35),
-                  //   actions: [
-                  //     Padding(
-                  //       padding: const EdgeInsets.only(right: 12.0),
-                  //       child: IconButton(
-                  //         onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
-                  //         },
-                  //         icon: Stack(clipBehavior: Clip.none, children: [
-                  //           Image.asset(
-                  //             Images.cart_arrow_down_image,
-                  //             height: Dimensions.ICON_SIZE_DEFAULT,
-                  //             width: Dimensions.ICON_SIZE_DEFAULT,
-                  //             color: ColorResources.getPrimary(context),
-                  //           ),
-                  //           Positioned(top: -4, right: -4,
-                  //             child: Consumer<CartProvider>(builder: (context, cart, child) {
-                  //               return CircleAvatar(radius: 7, backgroundColor: ColorResources.RED,
-                  //                 child: Text(cart.cartList.length.toString(),
-                  //                     style: titilliumSemiBold.copyWith(color: ColorResources.WHITE, fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
-                  //                     )),
-                  //               );
-                  //             }),
-                  //           ),
-                  //         ]),
-                  //       ),
-                  //     ),
-                  //
-                  //
-                  //   ],
-                  // ),
-                  // Search Button
                   SliverPersistentHeader(
                     pinned: true,
                     delegate: SliverDelegate(

@@ -42,6 +42,10 @@ class AppConstants {
   static const String WISH_LIST_GET_URI = '/api/v1/customer/wish-list';
   static const String SUPPORT_TICKET_URI = '/api/v1/customer/support-ticket/create';
   static const String MAIN_BANNER_URI = '/api/v1/banners?banner_type=main_banner';
+
+
+  /// ukrbd
+  static const String MAIN_BANNER_URI_UKRBD = '/api/sliders';
   static const String FOOTER_BANNER_URI = '/api/v1/banners?banner_type=footer_banner';
   static const String MAIN_SECTION_BANNER_URI = '/api/v1/banners?banner_type=main_section_banner';
   static const String RELATED_PRODUCT_URI = '/api/v1/products/related-products/';

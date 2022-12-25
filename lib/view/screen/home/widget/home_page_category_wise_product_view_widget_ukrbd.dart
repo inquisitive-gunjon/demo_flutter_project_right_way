@@ -27,77 +27,81 @@ class _CategoryWiseProductViewWidgetState extends State<CategoryWiseProductViewW
 
   @override
   void initState() {
-    _load(widget.reload,context);
+   // _load(widget.reload,context);
     // TODO: implement initState
     super.initState();
   }
 
-  _load(bool reload,BuildContext context)async{
-    //Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).clear();
-    categoryWiseProductList= await Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductListForHomePage(reload, context, widget.id);
-  }
+  // _load(bool reload,BuildContext context)async{
+  //   //Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).clear();
+  //   categoryWiseProductList= await Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductListForHomePage(reload, context, widget.id);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
 
-    // CategoryWiseProductViewWidget(id: "76",title: "Men's Fashion",),
-    // CategoryWiseProductViewWidget(id: "80",title: "Ladies Fashion",),
-    // CategoryWiseProductViewWidget(id: "55",title: "Computer & IT",),
-    // CategoryWiseProductViewWidget(id: "71",title: "Mobile",),
-    // CategoryWiseProductViewWidget(id: "78",title: "Fragrances",),
-    // CategoryWiseProductViewWidget(id: "75",title: "Networking",),
-    // CategoryWiseProductViewWidget(id: "79",title: "kids Fashion",),
-    // CategoryWiseProductViewWidget(id: "74",title: "Health & Herbs",),
-    // CategoryWiseProductViewWidget(id: "52",title: "Stationery & Office",),
-    // CategoryWiseProductViewWidget(id: "56",title: "Electrical & Lighting",),
-    // CategoryWiseProductViewWidget(id: "58",title: "Electronics & Appliances",),
-    // CategoryWiseProductViewWidget(id: "63",title: "Robotics and Artificial Intelligence",),
-    // CategoryWiseProductViewWidget(id: "58",title: "Electronics & Appliances",),
-    // CategoryWiseProductViewWidget(id: "63",title: "Robotics and Artificial Intelligence",),
-    // CategoryWiseProductViewWidget(id: "65",title: "Lab Equipment",),
-    // CategoryWiseProductViewWidget(id: "66",title: "Furniture",),
-    // CategoryWiseProductViewWidget(id: "69",title: "Software Service & Solution",),
-    // CategoryWiseProductViewWidget(id: "81",title: "Comforter",),
-    // CategoryWiseProductViewWidget(id: "82",title: "Winter Collection",),
-
-
+    });
     return Column(
       children: [
-        categoryWiseProductList.length>0 ?
+        // categoryWiseProductList.length>0 ?
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL,vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
           child: Padding(
             padding: const EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
-            child: CustomTitleRow(title: getTranslated(widget.title, context),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
-                    isBrand: false,
-                    id: widget.id,
-                    name: widget.title,
-                    isSubcategory: false,
-                    isHome: true,
-                    productsList: categoryWiseProductList,
-                  )));
-                }),
+            child: FutureBuilder(
+              future: Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductListForHomePage(true, context, widget.id),
+              builder: ((context, snapshot) {
+                if(snapshot.hasData){
+                  List<Data> list=snapshot.data;
+                  return CustomTitleRow(title: getTranslated(widget.title, context),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => BrandAndCategoryProductScreenUkrbd(
+                          isBrand: false,
+                          id: widget.id,
+                          name: widget.title,
+                          isSubcategory: false,
+                          isHome: true,
+                          productsList: list,
+                        )));
+                      });
+                }else{
+                  return SizedBox.shrink();
+                }
+              }),
+            ),
           ),
-        ):SizedBox.shrink(),
+        ),
 
         Padding(
           padding: const EdgeInsets.only(bottom: Dimensions.HOME_PAGE_PADDING),
           child: Column(
               children: [
-                categoryWiseProductList.length!=0?
+                // categoryWiseProductList.length!=0?
                 Container(
                   height: MediaQuery.of(context).size.width/1.45,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categoryWiseProductList.length,
-                      itemBuilder: (ctx,index){
-                        return Container(width: (MediaQuery.of(context).size.width/2.06)-20,
-                            child: ProductWidgetUkrbd(productModel: categoryWiseProductList[index]));
+                  child: FutureBuilder(
+                    future: Provider.of<CategoryWiseProductProviderUkrbd>(context, listen: false).getCategoryWiseProductListForHomePage(true, context, widget.id),
+                    builder: ((context, snapshot) {
+                      if(snapshot.hasData){
+                        List<Data> list=snapshot.data;
+
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: list.length,
+                            itemBuilder: (ctx,index){
+                              return Container(width: (MediaQuery.of(context).size.width/2.06)-20,
+                                  child: ProductWidgetUkrbd(productModel: list[index]));
+                            }
+                        );
+                      }else{
+                        return ProductShimmer(isHomePage: true ,isEnabled: true);
                       }
+
+                    }
+                    ),
                   ),
-                ): ProductShimmer(isHomePage: true ,isEnabled: true),
+                ),
               ]
           ),
         ),

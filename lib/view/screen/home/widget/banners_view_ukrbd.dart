@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/banner_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
@@ -65,16 +66,16 @@ class BannersViewUkrbd extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Consumer<BannerProvider>(
-          builder: (context, bannerProvider, child) {
+        Consumer<BannerProviderUkrbd>(
+          builder: (context, bannerProviderUkrbd, child) {
 
-            List<String> bannerList=BannerModelClass().bannerList;
+            //List<String> bannerList=BannerModelClass().bannerList;
             double _width = MediaQuery.of(context).size.width;
             return Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
               width: _width,
               height: _width * 0.295,
-              child: bannerProvider.mainBannerList != null ? bannerProvider.mainBannerList.length != 0 ? Stack(
+              child: bannerProviderUkrbd.mainBannerList != null ? bannerProviderUkrbd.mainBannerList.length != 0 ? Stack(
                 fit: StackFit.expand,
                 children: [
                   CarouselSlider.builder(
@@ -96,9 +97,9 @@ class BannersViewUkrbd extends StatelessWidget {
 
                     ),
                     // itemCount: bannerProvider.mainBannerList.length == 0 ? 1 : bannerProvider.mainBannerList.length,
-                    itemCount: bannerList.length,
+                    itemCount: bannerProviderUkrbd.mainBannerList.length,
                     itemBuilder: (context, index, _) {
-                      String bannerImage=bannerList[index].toString();
+                      String bannerImage=bannerProviderUkrbd.mainBannerList[index].image;
 
                       // print('${Provider.of<SplashProvider>(context,listen: false).baseUrls.bannerImageUrl}'
                       //           '/${bannerProvider.mainBannerList[index].photo}');
@@ -115,13 +116,13 @@ class BannersViewUkrbd extends StatelessWidget {
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
-                            child: Image.asset(bannerImage,fit: BoxFit.cover,),
-                            // FadeInImage.assetNetwork(
-                            //   placeholder: Images.placeholder, fit: BoxFit.cover,
-                            //   image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.bannerImageUrl}'
-                            //       '/${bannerProvider.mainBannerList[index].photo}',
-                            //   imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder_3x1, fit: BoxFit.cover),
-                            // ),
+                            child:
+                            // Image.asset(bannerImage,fit: BoxFit.cover,),
+                            FadeInImage.assetNetwork(
+                              placeholder: Images.placeholder, fit: BoxFit.cover,
+                              image: 'https://ukrbd.com/images/slider_images/${bannerImage}',
+                              imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder_3x1, fit: BoxFit.cover),
+                            ),
                           ),
                         ),
                       );
@@ -134,11 +135,11 @@ class BannersViewUkrbd extends StatelessWidget {
                     right: 0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: bannerList.map((banner) {
-                        int index = bannerList.indexOf(banner);
+                      children: bannerProviderUkrbd.mainBannerList.map((banner) {
+                        int index = bannerProviderUkrbd.mainBannerList.indexOf(banner);
                         return TabPageSelectorIndicator(
-                          backgroundColor: index == bannerProvider.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
-                          borderColor: index == bannerProvider.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
+                          backgroundColor: index == bannerProviderUkrbd.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
+                          borderColor: index == bannerProviderUkrbd.currentIndex ? Theme.of(context).primaryColor : Colors.grey,
                           size: 10,
                         );
                       }).toList(),
@@ -148,7 +149,7 @@ class BannersViewUkrbd extends StatelessWidget {
               ) : Center(child: Text('No banner available')) : Shimmer.fromColors(
                 baseColor: Colors.grey[300],
                 highlightColor: Colors.grey[100],
-                enabled: bannerProvider.mainBannerList == null,
+                enabled: bannerProviderUkrbd.mainBannerList == null,
                 child: Container(margin: EdgeInsets.symmetric(horizontal: 10), decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: ColorResources.WHITE,
@@ -166,24 +167,24 @@ class BannersViewUkrbd extends StatelessWidget {
 
 }
 
-class BannerModelClass{
-
-  List<String> bannerList=[
-    "assets/banner/1.jpg",
-    "assets/banner/2.jpg",
-    "assets/banner/3.jpg",
-    "assets/banner/4.jpg",
-    "assets/banner/5.jpg",
-    "assets/banner/6.png",
-    "assets/banner/7.jpg",
-    "assets/banner/8.jpg",
-    "assets/banner/9.jpg",
-    "assets/banner/10.jpg",
-    "assets/banner/11.jpg",
-    "assets/banner/12.jpg",
-    "assets/banner/13.jpg",
-    "assets/banner/14.jpg",
-  ];
-
-}
+// class BannerModelClass{
+//
+//   List<String> bannerList=[
+//     "assets/banner/1.jpg",
+//     "assets/banner/2.jpg",
+//     "assets/banner/3.jpg",
+//     "assets/banner/4.jpg",
+//     "assets/banner/5.jpg",
+//     "assets/banner/6.png",
+//     "assets/banner/7.jpg",
+//     "assets/banner/8.jpg",
+//     "assets/banner/9.jpg",
+//     "assets/banner/10.jpg",
+//     "assets/banner/11.jpg",
+//     "assets/banner/12.jpg",
+//     "assets/banner/13.jpg",
+//     "assets/banner/14.jpg",
+//   ];
+//
+// }
 
