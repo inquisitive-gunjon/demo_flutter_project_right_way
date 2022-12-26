@@ -4,15 +4,12 @@ import 'package:flutter_sixvalley_ecommerce/data/model/response/product_model.da
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/banner_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/brand_provider.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/category_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/category_provider_ukrbd.dart';
-import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/top_seller_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/view/screen/product/product_details_screen.dart';
-import 'package:flutter_sixvalley_ecommerce/view/screen/topSeller/top_seller_product_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 class BannersViewUkrbd extends StatelessWidget {
@@ -64,9 +61,13 @@ class BannersViewUkrbd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
+
       children: [
+
         Consumer<BannerProviderUkrbd>(
+
           builder: (context, bannerProviderUkrbd, child) {
 
             //List<String> bannerList=BannerModelClass().bannerList;
@@ -92,7 +93,7 @@ class BannersViewUkrbd extends StatelessWidget {
                       viewportFraction: 1,
                       disableCenter: true,
                       onPageChanged: (index, reason) {
-                        Provider.of<BannerProvider>(context, listen: false).setCurrentIndex(index);
+                        Provider.of<BannerProviderUkrbd>(context, listen: false).setCurrentIndex(index);
                       },
 
                     ),
@@ -153,7 +154,8 @@ class BannersViewUkrbd extends StatelessWidget {
                 child: Container(margin: EdgeInsets.symmetric(horizontal: 10), decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: ColorResources.WHITE,
-                )),
+                )
+                ),
               ),
             );
           },

@@ -3,6 +3,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/banner_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/cart_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
@@ -62,6 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _route() {
+    // await Provider.of<BannerProviderUkrbd>(context, listen: false).getBannerList(true, context);
     Provider.of<SplashProvider>(context, listen: false).initConfig(context).then((bool isSuccess) {
 
       print(".........................Initial Configuration.......................");

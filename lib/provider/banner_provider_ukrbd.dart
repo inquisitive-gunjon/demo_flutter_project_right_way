@@ -12,9 +12,9 @@ class BannerProviderUkrbd extends ChangeNotifier {
 
   BannerProviderUkrbd({@required this.bannerRepoUkrbd});
 
-  List<Sliders> _mainBannerList;
-  List<Sliders> _footerBannerList;
-  List<Sliders> _mainSectionBannerList;
+  List<Sliders> _mainBannerList=[];
+  List<Sliders> _footerBannerList=[];
+  List<Sliders> _mainSectionBannerList=[];
   Product _product;
   int _currentIndex;
 
@@ -25,10 +25,10 @@ class BannerProviderUkrbd extends ChangeNotifier {
   int get currentIndex => _currentIndex;
 
   Future<void> getBannerList(bool reload, BuildContext context) async {
-    if (_mainBannerList == null || reload) {
+    // if (_mainBannerList == null || reload) {
       ApiResponse apiResponse = await bannerRepoUkrbd.getBannerList();
       if (apiResponse.response != null && apiResponse.response.statusCode == 200) {
-        _mainBannerList = [];
+        _mainBannerList=[];
         // apiResponse.response.data.forEach((bannerModel) => _mainBannerList.add(BannerModelUkrbd().fromJson(bannerModel));
 
         BannerModelUkrbd bannerModelUkrbd=BannerModelUkrbd.fromJson(apiResponse.response.data);
@@ -38,7 +38,7 @@ class BannerProviderUkrbd extends ChangeNotifier {
       } else {
         ApiChecker.checkApi(context, apiResponse);
       }
-    }
+    // }
   }
 
   void setCurrentIndex(int index) {

@@ -1,9 +1,12 @@
 
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/button/custom_button.dart';
 import 'package:flutter_sixvalley_ecommerce/view/basewidget/not_loggedin_widget_ukrbd.dart';
+import 'package:flutter_sixvalley_ecommerce/view/basewidget/textfield/custom_textfield.dart';
 
 
 class ProfileScreenUkrbd extends StatefulWidget {
@@ -37,7 +40,7 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: isLogedIn?Stack(
+      body: !isLogedIn?Stack(
         children: [
 
           Align(
@@ -112,7 +115,7 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisSize: MainAxisSize.max,
@@ -123,19 +126,7 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
                       )
                     ],
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(Icons.account_box_outlined)
-                        ],
-                      )
-                    ],
-                  ),
+                  WithDraw(),
                 ],
               ),
             ),
@@ -195,8 +186,8 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
                     Tab(
                       child: Column(
                         children: [
-                          Text("0"),
-                          Text("My Wishlist",style: TextStyle(fontSize: 10),),
+                          Text(""),
+                          Text("My Profile",style: TextStyle(fontSize: 10),),
                         ],
                       ),
                     ),
@@ -204,15 +195,15 @@ class _ProfileScreenUkrbdState extends State<ProfileScreenUkrbd> with SingleTick
                       child: Column(
                         children: [
                           Text("0"),
-                          Text("Followed Stores",style: TextStyle(fontSize: 10),),
+                          Text("My Wish List",style: TextStyle(fontSize: 10),),
                         ],
                       ),
                     ),
                     Tab(
                       child: Column(
                         children: [
-                          Text("0"),
-                          Text("Vouchers",style: TextStyle(fontSize: 10),),
+                          Text("\$ 450"),
+                          Text("Withdraw",style: TextStyle(fontSize: 10),),
                         ],
                       ),
                     ),
@@ -252,4 +243,225 @@ class MyClipper extends CustomClipper<Path>{
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 
+}
+
+
+class WithDraw extends StatefulWidget {
+  const WithDraw({Key key}) : super(key: key);
+
+  @override
+  _WithDrawState createState() => _WithDrawState();
+}
+
+class _WithDrawState extends State<WithDraw> {
+
+  TextEditingController _phoneController;
+
+  FocusNode _phoneFocus;
+
+
+  final List<String> items = [
+    '0',
+
+  ];
+  final List<String> paymentItems = [
+    'bKash',
+    'Nagad',
+    'Rocket',
+
+  ];
+  String selectedValue;
+  String selectedpayment;
+
+  List<DropdownMenuItem<String>> _addDividersAfterItems(List<String> items) {
+    List<DropdownMenuItem<String>> _menuItems = [];
+    for (var item in items) {
+      _menuItems.addAll(
+        [
+          DropdownMenuItem<String>(
+            value: item,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                item,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          //If it's last item, we will not add Divider after it.
+          if (item != items.last)
+            const DropdownMenuItem<String>(
+              enabled: false,
+              child: Divider(),
+            ),
+        ],
+      );
+    }
+    return _menuItems;
+  }
+
+  List<double> _getCustomItemsHeights() {
+    List<double> _itemsHeights = [];
+    for (var i = 0; i < (items.length * 2) - 1; i++) {
+      if (i.isEven) {
+        _itemsHeights.add(40);
+      }
+      //Dividers indexes will be the odd indexes
+      if (i.isOdd) {
+        _itemsHeights.add(4);
+      }
+    }
+    return _itemsHeights;
+  }
+  List<double> _getCustomItemsHeightsForPayment() {
+    List<double> _itemsHeights = [];
+    for (var i = 0; i < (paymentItems.length * 2) - 1; i++) {
+      if (i.isEven) {
+        _itemsHeights.add(40);
+      }
+      //Dividers indexes will be the odd indexes
+      if (i.isOdd) {
+        _itemsHeights.add(4);
+      }
+    }
+    return _itemsHeights;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 300,
+      // color: Colors.red,
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+
+          SizedBox(
+            height: 60,
+          ),
+
+          Text("WITHDRAW",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+          Divider(
+
+          ),
+          Text('Profit',style: TextStyle(color: Colors.black45,fontSize: 18),),
+          DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              isExpanded: true,
+              hint: Text(
+                '0',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).hintColor,
+                ),
+              ),
+              items: _addDividersAfterItems(items),
+              customItemsHeights: _getCustomItemsHeights(),
+              value: selectedValue,
+              onChanged: (value) {
+                setState(() {
+                  selectedValue = value as String;
+                });
+              },
+              buttonHeight: 50,
+              buttonPadding: EdgeInsets.symmetric(horizontal: 20),
+              dropdownMaxHeight: 200,
+              buttonWidth: double.infinity,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+              buttonDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.black26,
+                ),
+                //color: Colors.redAccent,
+              ),
+            ),
+          ),
+          Divider(),
+          Text('Bonus',style: TextStyle(color: Colors.black45,fontSize: 18),),
+          DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              isExpanded: true,
+              hint: Text(
+                '0',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).hintColor,
+                ),
+              ),
+              items: _addDividersAfterItems(items),
+              customItemsHeights: _getCustomItemsHeights(),
+              value: selectedValue,
+              onChanged: (value) {
+                setState(() {
+                  selectedValue = value as String;
+                });
+              },
+              buttonHeight: 50,
+              buttonPadding: EdgeInsets.symmetric(horizontal: 20),
+              dropdownMaxHeight: 200,
+              buttonWidth: double.infinity,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+              buttonDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.black26,
+                ),
+                //color: Colors.redAccent,
+              ),
+            ),
+          ),
+          Divider(),
+          Text('Select a Payment System',style: TextStyle(color: Colors.black45,fontSize: 18),),
+          DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              isExpanded: true,
+              hint: Text(
+                'Select item',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).hintColor,
+                ),
+              ),
+              items: _addDividersAfterItems(paymentItems),
+              customItemsHeights: _getCustomItemsHeightsForPayment(),
+              value: selectedpayment,
+              onChanged: (value) {
+                setState(() {
+                  selectedpayment = value as String;
+                });
+              },
+              buttonHeight: 50,
+              buttonPadding: EdgeInsets.symmetric(horizontal: 20),
+              dropdownMaxHeight: 200,
+              buttonWidth: double.infinity,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+              buttonDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(
+                  color: Colors.black26,
+                ),
+                //color: Colors.redAccent,
+              ),
+            ),
+          ),
+         // Divider(),
+          Text('Phone Number',style: TextStyle(color: Colors.black45,fontSize: 18),),
+          CustomTextField(
+            hintText: '01XXXXXXXXX',
+            controller: _phoneController,
+            focusNode: _phoneFocus,
+            nextNode: _phoneFocus,
+          ),
+          Divider(),
+          CustomButton(buttonText: 'WITHDRAW')
+        ],
+      ),
+    );
+  }
 }
