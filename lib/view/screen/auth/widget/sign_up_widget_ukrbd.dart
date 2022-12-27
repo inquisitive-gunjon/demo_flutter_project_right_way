@@ -1,9 +1,11 @@
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/email_checker.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/auth_provider.dart';
+import 'package:flutter_sixvalley_ecommerce/provider/auth_provider_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/profile_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/provider/splash_provider.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
@@ -40,7 +42,7 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
   FocusNode _passwordFocus = FocusNode();
   FocusNode _confirmPasswordFocus = FocusNode();
 
-  RegisterModel register = RegisterModel();
+  RegisterModelUkrbd register = RegisterModelUkrbd();
   bool isEmailVerified = false;
 
 
@@ -50,7 +52,7 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
       isEmailVerified = true;
 
       String _firstName = _firstNameController.text.trim();
-      String _lastName = _lastNameController.text.trim();
+      // String _lastName = _lastNameController.text.trim();
       String _email = _emailController.text.trim();
       String _phone = _phoneController.text.trim();
       String _phoneNumber = _countryDialCode+_phoneController.text.trim();
@@ -59,15 +61,17 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
 
       if (_firstName.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(getTranslated('first_name_field_is_required', context)),
+          content: Text("Full name field is required"),//getTranslated('first_name_field_is_required', context)),
           backgroundColor: Colors.red,
         ));
-      }else if (_lastName.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(getTranslated('last_name_field_is_required', context)),
-          backgroundColor: Colors.red,
-        ));
-      } else if (_email.isEmpty) {
+      }
+      // else if (_lastName.isEmpty) {
+      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text(getTranslated('last_name_field_is_required', context)),
+      //     backgroundColor: Colors.red,
+      //   ));
+      // }
+      else if (_email.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(getTranslated('EMAIL_MUST_BE_REQUIRED', context)),
           backgroundColor: Colors.red,
@@ -98,12 +102,13 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
           backgroundColor: Colors.red,
         ));
       } else {
-        register.fName = '${_firstNameController.text}';
-        register.lName = _lastNameController.text ?? " ";
+        register.name = '${_firstNameController.text}';
+        //register. = _lastNameController.text ?? " ";
         register.email = _emailController.text;
-        register.phone = _phoneNumber;
+        register.mobile = _phoneNumber;
         register.password = _passwordController.text;
-        await Provider.of<AuthProvider>(context, listen: false).registration(register, route);
+        register.confirmPassword = _passwordController.text;
+        await Provider.of<AuthProviderUkrbd>(context, listen: false).registration(register, route,context);
       }
     } else {
       isEmailVerified = false;

@@ -6,6 +6,8 @@ class AppConstants {
   static const String BASE_URL = 'https://6valley.6amtech.com';
   /// for ukrbd
   static const String UKRBD_BASE_URL = 'http://ukrbd.com';
+  static const String REGISTER_UKRBD = '/api/customer/register';
+  static const String MERCHANT_REGISTER_UKRBD = '/api/merchandiser/register';
 
 
   static const String USER_ID = 'userId';
@@ -46,6 +48,9 @@ class AppConstants {
 
   /// ukrbd
   static const String MAIN_BANNER_URI_UKRBD = '/api/sliders';
+
+
+
   static const String FOOTER_BANNER_URI = '/api/v1/banners?banner_type=footer_banner';
   static const String MAIN_SECTION_BANNER_URI = '/api/v1/banners?banner_type=main_section_banner';
   static const String RELATED_PRODUCT_URI = '/api/v1/products/related-products/';

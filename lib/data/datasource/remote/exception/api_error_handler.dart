@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/error_response.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/response/base/error_response_ukrbd.dart';
 
 class ApiErrorHandler {
   static dynamic getMessage(error) {
@@ -30,10 +31,10 @@ class ApiErrorHandler {
                   errorDescription = error.response.statusMessage;
                   break;
                 default:
-                  ErrorResponse errorResponse =
-                  ErrorResponse.fromJson(error.response.data);
-                  if (errorResponse.errors != null &&
-                      errorResponse.errors.length > 0)
+                  ErrorResponseUkrbd errorResponse =
+                  ErrorResponseUkrbd.fromJson(error.response.data);
+                  if (errorResponse.errors != null)// &&
+                      // errorResponse.errors.length > 0)
                     errorDescription = errorResponse;
                   else
                     errorDescription =
