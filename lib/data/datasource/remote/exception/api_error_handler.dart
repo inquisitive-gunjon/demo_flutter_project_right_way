@@ -30,6 +30,10 @@ class ApiErrorHandler {
                 errorDescription =
                 "${error.response.data.toString()}";
                 break;
+                case 403:
+                  errorDescription =
+                  "${error.response.data.toString()}";
+                  break;
                 case 503:
                   errorDescription = error.response.statusMessage;
                   break;
