@@ -108,6 +108,8 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
         register.mobile = _phoneNumber;
         register.password = _passwordController.text;
         register.confirmPassword = _passwordController.text;
+
+
         await Provider.of<AuthProviderUkrbd>(context, listen: false).registration(register, route,context);
       }
     } else {
@@ -231,18 +233,18 @@ class _SignUpWidgetUkrbdState extends State<SignUpWidgetUkrbd> {
                 margin: EdgeInsets.only(left: Dimensions.MARGIN_SIZE_DEFAULT,
                     right: Dimensions.MARGIN_SIZE_DEFAULT, top: Dimensions.MARGIN_SIZE_SMALL),
                 child: Row(children: [
-                  CodePickerWidget(
-                    onChanged: (CountryCode countryCode) {
-                      _countryDialCode = countryCode.dialCode;
-                    },
-                    initialSelection: _countryDialCode,
-                    favorite: [_countryDialCode],
-                    showDropDownButton: true,
-                    padding: EdgeInsets.zero,
-                    showFlagMain: true,
-                    textStyle: TextStyle(color: Theme.of(context).textTheme.headline1.color),
-
-                  ),
+                  // CodePickerWidget(
+                  //   onChanged: (CountryCode countryCode) {
+                  //     _countryDialCode = countryCode.dialCode;
+                  //   },
+                  //   initialSelection: _countryDialCode,
+                  //   favorite: [_countryDialCode],
+                  //   showDropDownButton: true,
+                  //   padding: EdgeInsets.zero,
+                  //   showFlagMain: true,
+                  //   textStyle: TextStyle(color: Theme.of(context).textTheme.headline1.color),
+                  //
+                  // ),
 
 
 

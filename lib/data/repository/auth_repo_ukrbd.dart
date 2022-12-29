@@ -7,6 +7,7 @@ import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_clien
 import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/ukrbd_dio_client.dart';
 import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/login_model.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/body/merchant_register_model.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model_ukrbd.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
@@ -38,6 +39,19 @@ class AuthRepoUkrbd {
     try {
       Response response = await dioClient.post(
         AppConstants.REGISTER_UKRBD,
+        data: register.toJson(),
+        // queryParameters: register.toJson(),
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> merchantRegistration(MerchantRegisterModel register) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.MERCHANT_REGISTER_UKRBD,
         data: register.toJson(),
         // queryParameters: register.toJson(),
       );

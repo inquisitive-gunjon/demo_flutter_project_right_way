@@ -22,6 +22,9 @@ class AppConstants {
   static const String BRAND_PRODUCT_URI = '/api/v1/brands/products/';
   static const String CATEGORY_PRODUCT_URI = '/api/v1/categories/products/';
   static const String REGISTRATION_URI = '/api/v1/auth/register';
+  static const String MERCHANT_REGISTRATION_URI = '/api/merchandiser/register';
+
+
   static const String LOGIN_URI = '/api/v1/auth/login';
   static const String LATEST_PRODUCTS_URI = '/api/v1/products/latest?limit=10&&offset=';
   static const String NEW_ARRIVAL_PRODUCTS_URI = '/api/v1/products/latest?limit=10&&offset=';

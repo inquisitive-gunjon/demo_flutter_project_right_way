@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/dio/dio_client.dart';
 import 'package:flutter_sixvalley_ecommerce/data/datasource/remote/exception/api_error_handler.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/login_model.dart';
+import 'package:flutter_sixvalley_ecommerce/data/model/body/merchant_register_model.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/body/register_model.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/base/api_response.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/response/social_login_model.dart';
@@ -33,6 +34,17 @@ class AuthRepo {
 
 
   Future<ApiResponse> registration(RegisterModel register) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.REGISTRATION_URI,
+        data: register.toJson(),
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+  Future<ApiResponse> merchantRegistration(MerchantRegisterModel register) async {
     try {
       Response response = await dioClient.post(
         AppConstants.REGISTRATION_URI,

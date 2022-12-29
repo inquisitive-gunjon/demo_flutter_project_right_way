@@ -27,6 +27,9 @@ class ApiErrorHandler {
               switch (error.response.statusCode) {
                 case 404:
                 case 500:
+                errorDescription =
+                "${error.response.data.toString()}";
+                break;
                 case 503:
                   errorDescription = error.response.statusMessage;
                   break;
